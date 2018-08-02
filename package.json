@@ -1,0 +1,52 @@
+{
+  "name": "photostock",
+  "version": "1.0.0",
+  "description": "photos storage",
+  "main": "app.js",
+  "scripts": {
+    "serve": "webpack-dev-server --mode development --config=config/webpack.dev.js --open",
+    "build:prod": "webpack -p --progress --config=config/webpack.prod.js  --mode production",
+    "build:dev": "webpack -p --progress --config=config/webpack.dev.js  --mode development"
+  },
+  "dependencies": {
+    "npm": "^6.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "css": "^2.2.3",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "loader": "^2.1.1",
+    "redux-devtools": "^3.4.1",
+    "redux-devtools-dock-monitor": "^1.1.3",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-devtools-log-monitor": "^1.4.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.3"
+  },
+  "author": "montecamo",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orgs/shifu-photostock/frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/orgs/shifu-photostock/frontend/issues"
+  },
+  "homepage": "https://github.com/orgs/shifu-photostock/frontend#readme"
+}
