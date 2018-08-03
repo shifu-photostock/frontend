@@ -9,7 +9,10 @@
     "build:dev": "webpack -p --progress --config=config/webpack.dev.js  --mode development"
   },
   "dependencies": {
-    "npm": "^6.2.0",
+    "antd": "^3.7.3",
+    "axios": "^0.18.0",
+    "npm": "^6.3.0",
+    "nuka-carousel": "^4.3.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",

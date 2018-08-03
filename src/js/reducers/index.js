@@ -1,10 +1,10 @@
 'use strict'
 import { combineReducers } from 'redux';
 
-import Reducer from './Reducer';
+import photosReducer from './photosReducer';
 
 let reducer = combineReducers({
-  initial: Reducer,
+  photos: photosReducer,
 });
 
 export default reducer;
