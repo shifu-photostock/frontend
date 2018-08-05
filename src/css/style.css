@@ -8,6 +8,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .upload {
@@ -33,6 +34,11 @@ html, body, #root {
 .slider-slide {
   display: inline-flex !important;
   align-items: center;
+}
+
+.slider-slide img {
+  max-height: 300px;
+  object-fit: cover;
 }
 
 .navbar {
@@ -94,4 +100,12 @@ html, body, #root {
 
 .agreement:hover {
   color: rgb(64, 169, 255);
+}
+
+.ant-card-cover {
+  padding: 10px !important;
+}
+
+.ant-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09) !important;
 }

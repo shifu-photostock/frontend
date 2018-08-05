@@ -29,7 +29,7 @@ export default class Router extends Component {
             )} />
             <Route path='/gallery/carousel' render={(props) => (
               logged ? <Carousel {...props} /> :
-                <redirect to='/' />
+                <Redirect to='/' />
             )} />
             <Route path='/gallery/cards' render={(props) => (
               <Redirect to='/' />
@@ -43,6 +43,6 @@ export default class Router extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: user.logged
+    logged: !!user.data
   }
 }

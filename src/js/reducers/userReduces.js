@@ -1,6 +1,6 @@
 'use strict'
 let initialState = {
-  data: null
+  data: {}
 };
 
 const userReducer = (state=initialState, action) => {
