@@ -181,7 +181,7 @@ class RegistrationForm extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: user.logged
+    logged: !!user.data
   }
 }
 

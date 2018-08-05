@@ -21,7 +21,7 @@ export default class Home extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    user
+    logged: !!user.data
   }
 }
 

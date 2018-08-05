@@ -79,6 +79,10 @@ html, body, #root {
   width: 100%;
 }
 
+.primary {
+  color: #1890ff !important;
+}
+
 .agreement {
   color: rgb(24, 144, 255);
   background-color: transparent;

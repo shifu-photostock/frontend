@@ -1,12 +1,15 @@
 'use strict'
 let initialState = {
-  logged: false,
+  data: null
 };
 
 const userReducer = (state=initialState, action) => {
   switch(action.type) {
-  case '': 
+  case 'USER_LOGGED': 
+    state = {...state, data: action.payload}
     break;
+  case 'USER_LOGGED_OUT':
+    state = {...state, data: null}
   }
   return state;
 };

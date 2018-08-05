@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { loginUser } from '../actions/userActions';
 
@@ -29,15 +29,18 @@ class AuthForm extends Component {
   }
 
   render() {
+    if (this.props.logged) {
+      return <Redirect to='/' />
+    }
     const { getFieldDecorator } = this.props.form;
     let { type } = this.props;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
-          {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your email!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
           )}
         </FormItem>
         <FormItem>
@@ -61,7 +64,7 @@ class AuthForm extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: user.logged
+    logged: !!user.data
   }
 }
 

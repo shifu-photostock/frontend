@@ -9,6 +9,7 @@ import LoginForm from './components/login-form.jsx';
 import RegisterForm from './components/register-form.jsx';
 import Uploader from './components/uploader.jsx';
 import Carousel from './components/carousel.jsx';
+import Logout from './components/logout.jsx';
 
 @connect(mapStateToProps)
 export default class Router extends Component {

@@ -3,25 +3,25 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 
+import { logoutUser } from '../actions/userActions';
+
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Navbar extends Component {
   constructor() {
     super();
 
-    this.state = {
-      current: 'mail',
-    }
+    this.handleClick = this.handleClick.bind(this);
   }
 
-
-  handleClick(e) {
-    console.log('click ', e);
-    this.setState({
-      current: e.key,
-    });
+  handleClick({ key }) {
+    switch(key) {
+    case 'logout':
+      this.props.logout();
+      break;
+    }
   }
 
   render() {
@@ -33,11 +33,15 @@ export default class Navbar extends Component {
         </Menu.Item>
         {!logged && 
         <Menu.Item>
+          <Link className='primary' to='/register'>Sign up</Link>
+        </Menu.Item>}
+        {!logged && 
+        <Menu.Item>
           <Link to='/login'><Icon type="login" />Login</Link>
         </Menu.Item>}
         {logged && 
-        <Menu.Item>
-          <Link to='/logout'><Icon type="logout" />Logout</Link>
+        <Menu.Item key='logout'>
+          <Icon type="logout" />Logout
         </Menu.Item>}
         {logged && 
         <Menu.Item>
@@ -59,6 +63,14 @@ export default class Navbar extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: user.logged
+    logged: !!user.data
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => {
+      dispatch(logoutUser());
+    }
   }
 }
