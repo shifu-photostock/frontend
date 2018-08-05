@@ -19,8 +19,9 @@ export default class Home extends Component {
   }
 };
 
-function mapStateToProps({ theme }) {
+function mapStateToProps({ user }) {
   return {
+    user
   }
 }
 

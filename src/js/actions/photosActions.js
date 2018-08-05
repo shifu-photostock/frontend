@@ -55,6 +55,7 @@ export function deleteAll() {
 
 export function fetchPhotos() {
   return (dispatch, getState) => {
+    //return dispatch(deleteAll());
     let { photos } = getState();
     let page = photos.page;
     console.log('(page + 1) * 5 < photos.length', (page + 1) * 5 < photos.list.length);

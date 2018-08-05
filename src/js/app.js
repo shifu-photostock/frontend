@@ -8,11 +8,10 @@ import '../css/reset.css';
 import 'antd/dist/antd.css';
 
 import store from './containers/store';
-import Home from './components/home.jsx';
-
+import Router from './router';
 
 render((
   <Provider store={store}>
-    <Home />
+    <Router />
   </Provider>
 ), document.getElementById('root'));

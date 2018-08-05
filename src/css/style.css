@@ -18,18 +18,76 @@ html, body, #root {
 
 .upload__icon {
   font-size: 48px;
-  color: #1890ff;
+  color: rgb(121, 121, 121);
 }
 
 .upload__text {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .carousel {
-  width: 60%;
+  width: 80%;
+  min-height: 200px !important;
 }
 
 .slider-slide {
   display: inline-flex !important;
   align-items: center;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+}
+
+.ant-menu-item {
+  float: right !important;
+}
+
+.ant-menu-submenu {
+  float: right !important;
+}
+
+.submenu-item {
+  float: none !important;
+}
+
+.menu-wrapper__right {
+  display: inline-flex;
+  justify-content: right;
+}
+
+.ant-form {
+  font-size: 20px !important;
+}
+
+.logo {
+  float: left !important;
+  font-size: 34px;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.reg-form {
+  max-width: 450px;
+  padding: 10px;
+  width: 100%;
+}
+
+.agreement {
+  color: rgb(24, 144, 255);
+  background-color: transparent;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.agreement:hover {
+  color: rgb(64, 169, 255);
 }

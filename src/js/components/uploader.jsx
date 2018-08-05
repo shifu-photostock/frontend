@@ -9,7 +9,7 @@ const Uploader = (props) => {
   return (
     <Dragger {...props} className='upload'>
       <p className='upload__icon'>
-        <Icon type='inbox' />
+        <Icon type='download' />
       </p>
       <p className='upload__text'>
         Click or drag files to this area
