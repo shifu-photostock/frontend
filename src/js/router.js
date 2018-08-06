@@ -12,6 +12,7 @@ import Carousel from './components/carousel.jsx';
 import Logout from './components/logout.jsx';
 import Profile from './components/profile.jsx';
 
+
 @connect(mapStateToProps)
 export default class Router extends Component {
   render() {
