@@ -127,3 +127,11 @@ html, body, #root {
 .row-avatar {
   margin-bottom: 15px;
 }
+
+.regular-avatar .ant-avatar { 
+  margin-right: 10px;
+}
+
+.search-wrapper {
+  display: inline-block;
+}

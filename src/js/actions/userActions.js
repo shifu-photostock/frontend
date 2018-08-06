@@ -16,6 +16,25 @@ export function userLoggedOut() {
   }
 }
 
+export function checkLogged() {
+  return (dispatch) => {
+    const options = {
+      method: 'GET',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      withCredentials: true,
+      data: null,
+      url: `${SERVER}/`,
+    };
+    axios(options)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
 export function registerUser(user) {
   return (dispatch) => {
     axios.post(`${SERVER}/register`, { 

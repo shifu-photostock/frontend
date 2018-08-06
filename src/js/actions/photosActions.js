@@ -77,7 +77,10 @@ export function deleteAll() {
   }
 }
 
+import { checkLogged } from './userActions.js';
+
 export function fetchPhotos(pageNum) {
+//  return checkLogged();
   return (dispatch, getState) => {
     let { photos } = getState();
     let page = pageNum || photos.page;

@@ -3,14 +3,18 @@ import { connect } from 'react-redux';
 import { Row, Col, Avatar } from 'antd';
 
 const UserAvatar = (props) => (
-  <Row className='row-avatar' gutter={24}>
-    <Col className='col-avatar' span={8}>
-      <Avatar size={64} icon='user' />
-    </Col>
-    <Col span={16}>
-      {props.name !== undefined ? props.name : props.user.local.name}
-    </Col>
-  </Row>
+  props.nogrid ? (
+    <span className='regular-avatar'><Avatar size={64} icon='user'/>  {props.name !== undefined ? props.name : props.user.local.name}</span>
+  ) : (
+    <Row className='row-avatar' gutter={24}>
+      <Col className='col-avatar' span={8}>
+        <Avatar size={64} icon='user' />
+      </Col>
+      <Col span={16}>
+        {props.name !== undefined ? props.name : props.user.local.name}
+      </Col>
+    </Row>
+  )
 );
 
 const mapStateToProps = ({ user }) => {
