@@ -17,6 +17,7 @@ export default class PhotoCarousel extends Component {
 
   componentDidMount() {
     this.props.fetchPhotos();
+    this.props.fetchPhotos(this.props.page + 1)
   }
   
   handleLoadImage() {
@@ -27,7 +28,8 @@ export default class PhotoCarousel extends Component {
     let { page } = this.props;
 
     if (page != prevProps.page) {
-      this.props.fetchPhotos();
+      //this.props.fetchPhotos();
+      this.props.fetchPhotos(this.props.page + 1)
     }
   }
 
@@ -86,11 +88,12 @@ export default class PhotoCarousel extends Component {
       <div className='carousel'>
         <Carousel {...settings} ref={c => this.carousel = c}>
         {
-          photos.map((src) => {
-            if (src === '#') {
-            //  return <div key={Math.random()}></div>;
+          photos.map((photo) => {
+            if (photo) {
+              return <Photo key={photo.src} {...photo} loadHandler={this.handleLoadImage} />
+            } else {
+              return <div key={Math.random()}></div>
             }
-            return <Photo key={src} src={src} loadHandler={this.handleLoadImage} />
           })
         }
         </Carousel>

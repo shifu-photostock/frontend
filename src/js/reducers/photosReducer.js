@@ -3,24 +3,28 @@ let initialState = {
   list: [],
   page: 0,
   slide: 0,
-  loading: false
+  end: false
 };
 
 const photosReducer = (state=initialState, action) => {
   let list = state.list.concat();
   switch(action.type) {
+  case 'PHOTOS_END_REACHED':
+    state = {...state, end: true};
+    break;
   case 'INC_PAGE': {
     let { page } = state;
 
-    if ((page + 2) * 5 <= list.length) {
-      page++;
-    } else {
+    if (page >= Math.ceil(list.length / 5 - 1)) {
       page = 0;
+    } else {
+      page++;
     }
 
     state = {...state, page};
     break;
   }
+
   case 'DEC_PAGE':
     let { page } = state;
     if (page === 0) {
@@ -33,22 +37,26 @@ const photosReducer = (state=initialState, action) => {
   case 'FETCH_PHOTOS_START':
     state = {...state, loading: true};
     break;
+  case 'DELETE_PHOTO':
+    list = list.filter((photo) => {
+      if (!photo) return;
+      let id = typeof photo === undefined ? null : photo.id;
+
+      if (id === action.payload) {
+        return false;
+      }
+      return true;
+    });
+    state = {...state, list};
+    break;
   case 'FETCH_PHOTOS_SUCCESS': 
-    list = list.slice(0, list.length - 5);
-    list = list.concat(action.payload);
-
-    let num;
-    if (action.payload.length === 5) {
-      num = 5;
-    } else {
-      num = 5 - action.payload.length;
+    let data = action.payload 
+    for (let i = data.page * 5, counter = 0; counter < 5; i++, counter++) {
+      list[i] = data.photos[counter]/* || {src: null}*/;
+      console.log(i);
     }
 
-    for (let i = 0; i < num; i++) {
-      list.push(null);
-    }
-
-    state = {...state, loading: false, list};
+    state = {...state, list};
     break;
   }
   return state;

@@ -14,16 +14,45 @@ export function incPage() {
   }
 }
 
+export function endReached() {
+  return {
+    type: 'PHOTOS_END_REACHED'
+  }
+}
+
 export function decPage() {
   return {
     type: 'DEC_PAGE'
   }
 }
 
-export function fetchPhotosSuccess(photos) {
+export function fetchPhotosSuccess(photos, page) {
   return {
     type: 'FETCH_PHOTOS_SUCCESS',
-    payload: photos
+    payload: { photos, page } 
+  }
+}
+
+export function photoDeleted(id) {
+  return {
+    type: 'DELETE_PHOTO',
+    payload: id
+  }
+}
+
+
+export function deletePhoto(id) {
+  return (dispatch, getState) => {
+    let { photos } = getState();
+    axios.delete(`${SERVER}/files/${id}`)
+    .then((res) => {
+      console.log(res);
+      dispatch(photoDeleted(id));
+      dispatch(fetchPhotos(photos.page + 1));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 }
 
@@ -53,17 +82,16 @@ export function deleteAll() {
   }
 }
 
-export function fetchPhotos() {
+export function fetchPhotos(pageNum) {
   return (dispatch, getState) => {
-    //return dispatch(deleteAll());
     let { photos } = getState();
-    let page = photos.page;
-    console.log('(page + 1) * 5 < photos.length', (page + 1) * 5 < photos.list.length);
-    if (photos.loading || (page + 1) * 5 < photos.list.length ) {
-      console.log('return');
+    let page = pageNum || photos.page;
+    
+    console.log('photos end', photos.end);
+    if (photos.end) {
       return;
     }
-    dispatch(fetchPhotosStart());
+
     let path = `${SERVER}/carousel/${page}`;
 
     axios.get(path)
@@ -73,15 +101,17 @@ export function fetchPhotos() {
     })
     .then((photos) => {
       console.log(photos);
-      return photos.map((photo) => (
-        `${SERVER}/image/${photo.filename}`
-      ));
+      return photos.map((photo) => ({
+        src: `${SERVER}/image/${photo.filename}`,
+        id: photo._id
+      }));
     })
     .then((urls) => {
-      dispatch(fetchPhotosSuccess(urls));
+      dispatch(fetchPhotosSuccess(urls, page));
     })
     .catch((err) => {
       console.log(err);
+      dispatch(endReached());
     })
   }
 }
