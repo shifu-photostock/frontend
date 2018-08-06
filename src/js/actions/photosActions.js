@@ -27,6 +27,30 @@ export function fetchPhotosSuccess(photos) {
   }
 }
 
+export function photoDeleted(id) {
+  return {
+    type: 'DELETE_PHOTO',
+    payload: id
+  }
+}
+
+
+export function deletePhoto(id) {
+  return (dispatch, getState) => {
+    let { photos } = getState();
+    axios.get(`${SERVER}/files/${id}`);
+    axios.delete(`${SERVER}/files/${id}`)
+    .then((res) => {
+      console.log(res);
+      dispatch(photoDeleted(id));
+      dispatch(fetchPhotos(Math.round(photos.list.length / 5 - 2)));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
 export function deleteAll() {
   return (dispatch) => {
     axios.get(`${SERVER}/getallimages`)
@@ -53,12 +77,10 @@ export function deleteAll() {
   }
 }
 
-export function fetchPhotos() {
+export function fetchPhotos(pageNum) {
   return (dispatch, getState) => {
-    //return dispatch(deleteAll());
     let { photos } = getState();
-    let page = photos.page;
-    console.log('(page + 1) * 5 < photos.length', (page + 1) * 5 < photos.list.length);
+    let page = pageNum || photos.page;
     if (photos.loading || (page + 1) * 5 < photos.list.length ) {
       console.log('return');
       return;
@@ -73,9 +95,10 @@ export function fetchPhotos() {
     })
     .then((photos) => {
       console.log(photos);
-      return photos.map((photo) => (
-        `${SERVER}/image/${photo.filename}`
-      ));
+      return photos.map((photo) => ({
+        src: `${SERVER}/image/${photo.filename}`,
+        id: photo._id
+      }));
     })
     .then((urls) => {
       dispatch(fetchPhotosSuccess(urls));
