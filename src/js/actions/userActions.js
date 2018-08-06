@@ -37,6 +37,41 @@ export function registerUser(user) {
   }
 }
 
+export function changePassword(passwords, cb) {
+  return (dispatch) => {
+    setTimeout(() => {
+      cb('err');
+    }, 1000);
+    /*axios.post('')
+    .then((res) => {
+      console.log(res);
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      cb('error');
+    })*/
+  }
+}
+
+export function changeUserInfo(info, cb) {
+  return (dispatch) => {
+    setTimeout(() => {
+      cb('err');
+     }, 1000);
+    /*axios.post('')
+    .then((res) => {
+      console.log(res);
+      cb();
+    })
+    .catch((err) => {
+      console.log(err);
+      cb('error');
+    })*/
+ 
+   }
+}
+
 export function loginUser(user) {
   return (dispatch) => {
     axios.post(`${SERVER}/login`, { 

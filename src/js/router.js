@@ -10,6 +10,7 @@ import RegisterForm from './components/register-form.jsx';
 import Uploader from './components/uploader.jsx';
 import Carousel from './components/carousel.jsx';
 import Logout from './components/logout.jsx';
+import Profile from './components/profile.jsx';
 
 @connect(mapStateToProps)
 export default class Router extends Component {
@@ -23,6 +24,10 @@ export default class Router extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
+            <Route path='/profile' render={(props) => (
+              logged ? <Profile {...props} /> :
+                <Redirect to='/' />
+            )} />
             <Route path='/upload' render={(props) => (
               logged ? <Uploader {...props} /> :
                 <Redirect to='/' />
