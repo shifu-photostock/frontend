@@ -31,6 +31,12 @@ export default class Navbar extends Component {
         <Menu.Item className='logo'>
           <Link to='/'><Icon type='camera-o' /></Link>
         </Menu.Item>
+        {logged && 
+        <SubMenu className='profile-submenu' title={<Link to='/profile'><Icon type="user" />Profile</Link>} >
+          <Menu.Item className='submenu-item' key="logout">
+            <Icon type="logout" />Logout
+          </Menu.Item>
+        </SubMenu>}
         {!logged && 
         <Menu.Item>
           <Link className='primary' to='/register'>Sign up</Link>
@@ -38,10 +44,6 @@ export default class Navbar extends Component {
         {!logged && 
         <Menu.Item>
           <Link to='/login'><Icon type="login" />Login</Link>
-        </Menu.Item>}
-        {logged && 
-        <Menu.Item key='logout'>
-          <Icon type="logout" />Logout
         </Menu.Item>}
         {logged && 
         <Menu.Item>
