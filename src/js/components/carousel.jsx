@@ -86,11 +86,8 @@ export default class PhotoCarousel extends Component {
       <div className='carousel'>
         <Carousel {...settings} ref={c => this.carousel = c}>
         {
-          photos.map((src) => {
-            if (src === '#') {
-            //  return <div key={Math.random()}></div>;
-            }
-            return <Photo key={src} src={src} loadHandler={this.handleLoadImage} />
+          photos.map((photo) => {
+            return <Photo key={photo.src} {...photo} loadHandler={this.handleLoadImage} />
           })
         }
         </Carousel>

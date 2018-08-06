@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Icon } from 'antd'
+
+import { deletePhoto } from '../actions/photosActions';
 
 const { Meta } = Card;
 
+@connect(null, mapDispatchToProps)
 export default class Photo extends Component {
   constructor() {
     super();
@@ -13,7 +17,8 @@ export default class Photo extends Component {
   handleClick(e) {
     switch(e.target.id) {
     case 'delete':
-      console.log('delete');
+      console.log('delete', this.props.id);
+      this.props.delete(this.props.id);
       break;
     }
   }
@@ -24,11 +29,19 @@ export default class Photo extends Component {
         hoverable
         style={{width: 240}}
         cover={<img onLoad={this.props.loadHandler} src={this.props.src} />}
-        actions={[<Icon type="close-circle-o" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
+        actions={[<Icon onClick={this.handleClick} id='delete' type="close-circle-o" />,]}
       >
       </Card>
     )
   }
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    delete: (id) => {
+      dispatch(deletePhoto(id));
+    }
+  }
+}
 
 //TODO add hashtags on uploading
