@@ -1,6 +1,10 @@
 'use strict'
 let initialState = {
+<<<<<<< HEAD
   data: null
+=======
+  data: { local: {email: 'test', name: 'test' }} 
+>>>>>>> user_cabinet
 };
 
 const userReducer = (state=initialState, action) => {

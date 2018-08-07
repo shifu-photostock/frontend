@@ -89,6 +89,16 @@ html, body, #root {
   color: #1890ff !important;
 }
 
+.profile-submenu a {
+  color: rgba(0,0,0, 0.65) !important;
+  outline: none;
+  text-decoration: none;
+}
+
+.profile-submenu:hover a {
+  color: #1890ff !important;
+}
+
 .agreement {
   color: rgb(24, 144, 255);
   background-color: transparent;
@@ -108,4 +118,20 @@ html, body, #root {
 
 .ant-card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09) !important;
+}
+
+.col-avatar {
+  text-align: right;
+}
+
+.row-avatar {
+  margin-bottom: 15px;
+}
+
+.regular-avatar .ant-avatar { 
+  margin-right: 10px;
+}
+
+.search-wrapper {
+  display: inline-block;
 }

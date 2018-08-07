@@ -56,6 +56,30 @@ export function deletePhoto(id) {
   }
 }
 
+export function photoDeleted(id) {
+  return {
+    type: 'DELETE_PHOTO',
+    payload: id
+  }
+}
+
+
+export function deletePhoto(id) {
+  return (dispatch, getState) => {
+    let { photos } = getState();
+    axios.get(`${SERVER}/files/${id}`);
+    axios.delete(`${SERVER}/files/${id}`)
+    .then((res) => {
+      console.log(res);
+      dispatch(photoDeleted(id));
+      dispatch(fetchPhotos(Math.round(photos.list.length / 5 - 2)));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
 export function deleteAll() {
   return (dispatch) => {
     axios.get(`${SERVER}/getallimages`)
@@ -82,6 +106,7 @@ export function deleteAll() {
   }
 }
 
+<<<<<<< HEAD
 export function fetchPhotos(pageNum) {
   return (dispatch, getState) => {
     let { photos } = getState();
@@ -89,6 +114,17 @@ export function fetchPhotos(pageNum) {
     
     console.log('photos end', photos.end);
     if (photos.end) {
+=======
+import { checkLogged } from './userActions.js';
+
+export function fetchPhotos(pageNum) {
+//  return checkLogged();
+  return (dispatch, getState) => {
+    let { photos } = getState();
+    let page = pageNum || photos.page;
+    if (photos.loading || (page + 1) * 5 < photos.list.length ) {
+      console.log('return');
+>>>>>>> user_cabinet
       return;
     }
 
