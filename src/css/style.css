@@ -204,3 +204,21 @@ html, body, #root {
   margin: auto;
   max-width: 500px;
 }
+
+.photo-modal {
+  display: inline-block;
+  min-height: 250px;
+  min-width: 250px;
+  max-width: 90%;
+  max-height: 90%;
+  padding: 20px;
+}
+
+.photo-modal img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ant-modal-wrap {
+  text-align: center;
+}
