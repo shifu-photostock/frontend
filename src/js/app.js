@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import '../css/reset.css';
-import 'antd/dist/antd.css';
 import '../css/style.css';
 
 import store from './containers/store';
