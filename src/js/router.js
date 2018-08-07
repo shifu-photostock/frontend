@@ -9,6 +9,7 @@ import LoginForm from './components/login-form.jsx';
 import RegisterForm from './components/register-form.jsx';
 import Uploader from './components/uploader.jsx';
 import Carousel from './components/carousel.jsx';
+import PhotoCards from './components/photo-cards.jsx';
 import Logout from './components/logout.jsx';
 import Profile from './components/profile.jsx';
 
@@ -38,7 +39,8 @@ export default class Router extends Component {
                 <Redirect to='/' />
             )} />
             <Route path='/gallery/cards' render={(props) => (
-              <Redirect to='/' />
+              logged ? <PhotoCards {...props} /> :
+                <Redirect to='/' />
             )} />
           </Switch>
         </Fragment>

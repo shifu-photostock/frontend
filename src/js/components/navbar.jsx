@@ -56,7 +56,7 @@ export default class Navbar extends Component {
           <Menu.Item className='submenu-item' key="Carousel">
             <Link to='gallery/carousel'>Carousel</Link>
           </Menu.Item>
-          <Menu.Item disabled className='submenu-item' key="Cards">
+          <Menu.Item className='submenu-item' key="Cards">
             <Link to='gallery/cards'>Cards</Link>
           </Menu.Item>
         </SubMenu>}
