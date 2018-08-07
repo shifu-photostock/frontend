@@ -28,39 +28,41 @@ export default class Navbar extends Component {
   render() {
     let { logged } = this.props;
     return (
-      <Menu className='navbar' onClick={this.handleClick} mode="horizontal">
-        <Menu.Item className='logo'>
-          <Link to='/'><Icon type='camera-o' /></Link>
-        </Menu.Item>
-        <SearchBar />
-        {logged && 
-        <SubMenu className='profile-submenu' title={<Link to='/profile'><Icon type="user" />Profile</Link>} >
-          <Menu.Item className='submenu-item' key="logout">
-            <Icon type="logout" />Logout
+      <div className='navbar-wrapper'>
+        <Menu className='navbar' onClick={this.handleClick} mode="horizontal">
+          <Menu.Item className='logo'>
+            <Link to='/'><Icon type='camera-o' /></Link>
           </Menu.Item>
-        </SubMenu>}
-        {!logged && 
-        <Menu.Item>
-          <Link className='primary' to='/register'>Sign up</Link>
-        </Menu.Item>}
-        {!logged && 
-        <Menu.Item>
-          <Link to='/login'><Icon type="login" />Login</Link>
-        </Menu.Item>}
-        {logged && 
-        <Menu.Item>
-          <Link to='/upload'><Icon type="cloud-upload-o" />Upload</Link>
-        </Menu.Item>}
-        {logged && 
-        <SubMenu title={<span><Icon type="picture" />Gallery</span>}>
-          <Menu.Item className='submenu-item' key="Carousel">
-            <Link to='gallery/carousel'>Carousel</Link>
-          </Menu.Item>
-          <Menu.Item className='submenu-item' key="Cards">
-            <Link to='gallery/cards'>Cards</Link>
-          </Menu.Item>
-        </SubMenu>}
-      </Menu>
+          <SearchBar />
+          {logged && 
+          <SubMenu className='profile-submenu' title={<Link to='/profile'><Icon type="user" />Profile</Link>} >
+            <Menu.Item className='submenu-item' key="logout">
+              <Icon type="logout" />Logout
+            </Menu.Item>
+          </SubMenu>}
+          {!logged && 
+          <Menu.Item>
+            <Link className='primary' to='/register'>Sign up</Link>
+          </Menu.Item>}
+          {!logged && 
+          <Menu.Item>
+            <Link to='/login'><Icon type="login" />Login</Link>
+          </Menu.Item>}
+          {logged && 
+          <Menu.Item>
+            <Link to='/upload'><Icon type="cloud-upload-o" />Upload</Link>
+          </Menu.Item>}
+          {logged && 
+          <SubMenu title={<span><Icon type="picture" />Gallery</span>}>
+            <Menu.Item className='submenu-item' key="Carousel">
+              <Link to='/gallery/carousel'>Carousel</Link>
+            </Menu.Item>
+            <Menu.Item className='submenu-item' key="Cards">
+              <Link to='/gallery/cards'>Cards</Link>
+            </Menu.Item>
+          </SubMenu>}
+        </Menu>
+      </div>
     );
   }
 }

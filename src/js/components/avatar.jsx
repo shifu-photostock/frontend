@@ -4,7 +4,7 @@ import { Row, Col, Avatar } from 'antd';
 
 const UserAvatar = (props) => (
   props.nogrid ? (
-    <span className='regular-avatar'><Avatar size={64} icon='user'/>  {props.name !== undefined ? props.name : props.user.local.name}</span>
+    <span className='regular-avatar'><Avatar size={64} icon='user'/><span className='avatar-name'>{props.name !== undefined ? props.name : props.user.local.name}</span></span>
   ) : (
     <Row className='row-avatar' gutter={24}>
       <Col className='col-avatar' span={8}>

@@ -15,7 +15,7 @@ export default class Profile extends Component {
   render() {
     let { local } = this.props.user;
     return (
-      <div>
+      <div className='profile-edit-wrapper'>
         <Tabs
           defaultActiveKey='1'
           tabPosition='left'

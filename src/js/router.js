@@ -11,7 +11,8 @@ import Uploader from './components/uploader.jsx';
 import Carousel from './components/carousel.jsx';
 import PhotoCards from './components/photo-cards.jsx';
 import Logout from './components/logout.jsx';
-import Profile from './components/profile.jsx';
+import ProfileEdit from './components/profile-edit.jsx';
+import UserPage from './components/user-page.jsx';
 
 
 @connect(mapStateToProps)
@@ -26,8 +27,12 @@ export default class Router extends Component {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
+            <Route path='/profile-edit' render={(props) => (
+              logged ? <ProfileEdit {...props} /> :
+                <Redirect to='/' />
+            )} />
             <Route path='/profile' render={(props) => (
-              logged ? <Profile {...props} /> :
+              logged ? <UserPage {...props} /> :
                 <Redirect to='/' />
             )} />
             <Route path='/upload' render={(props) => (

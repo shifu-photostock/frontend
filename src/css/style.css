@@ -10,9 +10,11 @@ html, body, #root {
 }
 
 .upload {
-  width: 400px;
-  height: 150px;
-  margin-bottom: 100px;
+  max-width: 700px;
+  max-height: 350px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
 
 .upload__icon {
@@ -26,7 +28,8 @@ html, body, #root {
 
 .carousel {
   width: 80%;
-  min-height: 200px !important;
+  min-height: 200px;
+  margin: auto;
 }
 
 .slider-slide {
@@ -39,12 +42,18 @@ html, body, #root {
   object-fit: cover;
 }
 
-.navbar {
+.navbar-wrapper {
+  border-bottom: 1px solid #e8e8e8;
   width: 100%;
   position: fixed;
-  z-index: 999;
   top: 0;
   left: 0;
+  z-index: 999;
+}
+
+.navbar {
+  width: 71%;
+  margin: 0 auto;
 }
 
 .ant-menu-item {
@@ -73,6 +82,15 @@ html, body, #root {
   font-size: 34px;
 }
 
+.logo .anticon {
+  margin-right: 0;
+}
+
+.login-form {
+  width: 230px;
+  margin: auto;
+}
+
 .login-form-button {
   width: 100%;
 }
@@ -80,7 +98,8 @@ html, body, #root {
 .reg-form {
   max-width: 450px;
   padding: 10px;
-  width: 100%;
+  width: 450px;;
+  margin: auto;
 }
 
 .primary {
@@ -132,11 +151,12 @@ html, body, #root {
 
 .search-wrapper {
   display: inline-block;
+  margin-left: 20px;
 }
 
 .photo-cards {
   margin: auto;
-  width: 90%;
+  width: 75%;
   text-align: center;
   margin-bottom: 50px;
 }
@@ -144,4 +164,43 @@ html, body, #root {
 .photo-cards .ant-card {
   display: inline-block;
   margin: 10px;
+}
+
+.user-info {
+  max-width: 70%;
+  width: 100%;
+  margin: 50px auto 50px auto;
+}
+
+.user-info .ant-avatar {
+  width: 130px;
+  height: 130px;
+  font-size: 56px;
+}
+
+.user-info .regular-avatar {
+  font-size: 40px;
+}
+
+.user-info .edit-profile {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+.user-info .avatar-name {
+  vertical-align: top;
+  margin-left: 50px;
+}
+
+.user-info .anticon {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.profile-edit-wrapper {
+  margin: auto;
+  max-width: 500px;
 }

@@ -5,6 +5,7 @@ import { Button } from 'antd';
 
 import Uploader from './uploader.jsx';
 import PhotoCarousel from './carousel.jsx';
+import UserPage from './user-page.jsx';
 
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -12,8 +13,7 @@ export default class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Uploader />
-        <PhotoCarousel />
+        <div style={{margin: 'auto', fontSize: '54px'}}>Welcome!</div>
       </Fragment>
     );
   }
