@@ -1,6 +1,6 @@
 'use strict'
 let initialState = {
-  data: { local: {email: 'test', name: 'test' }} 
+  data: 'loading' 
 };
 
 const userReducer = (state=initialState, action) => {
@@ -8,6 +8,8 @@ const userReducer = (state=initialState, action) => {
   case 'USER_LOGGED': 
     state = {...state, data: action.payload}
     break;
+  case 'USER_NOT_LOGGED':
+    state = {...state, data: null}
   case 'USER_LOGGED_OUT':
     state = {...state, data: null}
   }

@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Spin } from 'antd';
 
 import Home from './components/home.jsx';
 import Navbar from './components/navbar.jsx';
@@ -13,12 +14,24 @@ import PhotoCards from './components/photo-cards.jsx';
 import Logout from './components/logout.jsx';
 import ProfileEdit from './components/profile-edit.jsx';
 import UserPage from './components/user-page.jsx';
+import { checkLogged } from './actions/userActions';
 
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Router extends Component {
+  componentDidMount() {
+    this.props.checkLogged();
+  }
+
   render() {
-    let { logged } = this.props;
+    let { logged, data } = this.props;
+
+    if (data === 'loading') {
+      return (
+        <Spin size='large' className='initial-load-spin'/>
+      )
+    }
+
     return (
       <BrowserRouter>
         <Fragment>
@@ -56,6 +69,15 @@ export default class Router extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: !!user.data
+    logged: !!user.data,
+    data: user.data
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    checkLogged: () => {
+      dispatch(checkLogged());
+    }
   }
 }

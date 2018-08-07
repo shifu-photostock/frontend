@@ -224,3 +224,18 @@ html, body, #root {
 .ant-modal-wrap {
   text-align: center;
 }
+
+.initial-load-spin {
+  margin: auto;
+}
+
+.ant-spin-lg .ant-spin-dot {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+.ant-spin-lg .ant-spin-dot i {
+  width: 27px;
+  height: 27px;
+}

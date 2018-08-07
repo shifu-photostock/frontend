@@ -7,7 +7,6 @@ import Uploader from './uploader.jsx';
 import PhotoCarousel from './carousel.jsx';
 import UserPage from './user-page.jsx';
 
-
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Home extends Component { 
   render() {
@@ -27,5 +26,8 @@ function mapStateToProps({ user }) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    checkLogged: () => {
+      dispatch(checkLogged())
+    }
   }
 }

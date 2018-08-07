@@ -9,6 +9,12 @@ export function userLogged(user) {
   }
 }
 
+export function userNotLogged() {
+  return {
+    type: 'USER_NOT_LOGGED'
+  }
+}
+
 export function userLoggedOut() {
   return {
     type: 'USER_LOGGED_OUT'
@@ -17,16 +23,17 @@ export function userLoggedOut() {
 
 export function checkLogged() {
   return (dispatch) => {
-    const options = {
-      method: 'GET',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      withCredentials: true,
-      data: null,
-      url: '/',
-    };
-    axios(options)
+    axios.get('/')
     .then((res) => {
       console.log(res);
+      return res.data.passport;
+    })
+    .then((passport) => {
+      if (passport === undefined) {
+        return dispatch(userNotLogged());
+      }
+
+      dispatch(userLogged(passport.user));
     })
     .catch((err) => {
       console.log(err);
