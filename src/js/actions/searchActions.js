@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../containers/axiosApi';
 
 import { getRandomInt } from '../containers/assets';
 

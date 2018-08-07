@@ -1,7 +1,6 @@
 'use strict'
-import axios from 'axios';
+import axios from '../containers/axiosApi.js';
 
-const SERVER = 'http://138.68.234.86:8888';
 
 export function userLogged(user) {
   return {
@@ -23,7 +22,7 @@ export function checkLogged() {
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       withCredentials: true,
       data: null,
-      url: `${SERVER}/`,
+      url: '/',
     };
     axios(options)
     .then((res) => {
@@ -37,7 +36,7 @@ export function checkLogged() {
 
 export function registerUser(user) {
   return (dispatch) => {
-    axios.post(`${SERVER}/register`, { 
+    axios.post('/register', { 
 
       username: user.email,
       name: user.nickname,
@@ -93,7 +92,7 @@ export function changeUserInfo(info, cb) {
 
 export function loginUser(user) {
   return (dispatch) => {
-    axios.post(`${SERVER}/login`, { 
+    axios.post('/login', { 
       username: user.email,
       password: user.password
     })   
@@ -113,7 +112,7 @@ export function loginUser(user) {
 export function logoutUser() {
   return (dispatch) => {
     dispatch(userLoggedOut());
-    axios.post(`${SERVER}/logout`)
+    axios.post('/logout')
     .then((res) => {
       console.log(res);
     })

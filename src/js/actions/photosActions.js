@@ -1,7 +1,5 @@
-import axios from 'axios';
+import axios from '../containers/axiosApi';
 import { checkLogged } from './userActions.js';
-
-const SERVER = 'http://138.68.234.86:8888';
 
 export function fetchPhotosStart() {
   return {
@@ -45,7 +43,7 @@ export function photoDeleted(id) {
 export function deletePhoto(id) {
   return (dispatch, getState) => {
     let { photos } = getState();
-    axios.delete(`${SERVER}/files/${id}`)
+    axios.delete('/files/${id}')
     .then((res) => {
       console.log(res);
       dispatch(photoDeleted(id));
@@ -59,7 +57,7 @@ export function deletePhoto(id) {
 
 export function deleteAll() {
   return (dispatch) => {
-    axios.get(`${SERVER}/getallimages`)
+    axios.get('/getallimages')
     .then((res) => {
       return res.data.files;
     })
@@ -94,7 +92,7 @@ export function fetchPhotos(pageNum) {
       return;
     }
 
-    let path = `${SERVER}/carousel/${page}`;
+    let path = `/carousel/${page}`;
 
     axios.get(path)
     .then((res) => {
@@ -104,7 +102,7 @@ export function fetchPhotos(pageNum) {
     .then((photos) => {
       console.log(photos);
       return photos.map((photo) => ({
-        src: `${SERVER}/image/${photo.filename}`,
+        src: `/image/${photo.filename}`,
         id: photo._id
       }));
     })
