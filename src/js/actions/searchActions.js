@@ -27,15 +27,17 @@ export function search(query) {
       return dispatch(searchSuccess([]));
     }
 
-    dispatch(searchSuccess(searchResult(query)));
+    //dispatch(searchSuccess(searchResult(query)));
 
-    /*axios.get('')
+    axios.post('/findbyname', {
+      name: query
+    })
     .then((res) => {
       console.log(res);
-      dispatch(searchSuccess(res.data));
+      //dispatch(searchSuccess(res.data));
     })
     .catch((err) => {
       console.log(err);
-    })*/
+    })
   }
 }

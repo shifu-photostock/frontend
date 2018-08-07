@@ -39,7 +39,6 @@ export function photoDeleted(id) {
   }
 }
 
-
 export function deletePhoto(id) {
   return (dispatch, getState) => {
     let { photos } = getState();
@@ -102,7 +101,7 @@ export function fetchPhotos(pageNum) {
     .then((photos) => {
       console.log(photos);
       return photos.map((photo) => ({
-        src: `/image/${photo.filename}`,
+        src: `http://138.68.234.86:8888/image/${photo.filename}`,
         id: photo._id
       }));
     })
