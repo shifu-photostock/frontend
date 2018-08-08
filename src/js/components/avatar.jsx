@@ -4,10 +4,11 @@ import { Row, Col, Avatar } from 'antd';
 
 const UserAvatar = (props) => {
   let name;
-  if (props.searchName) {
-    name = props.searchName;
-  } else if (props.name) {
+
+  if (props.name) {
     name = props.name;
+  } else if (props.searchName) {
+    name = props.searchName;
   } else {
     name = props.user && props.user.local.name;
   }

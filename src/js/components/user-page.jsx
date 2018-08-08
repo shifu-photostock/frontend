@@ -15,16 +15,19 @@ export default class UserPage extends Component {
       loading: !!props.match.params.name
     }
   }
+
   componentDidMount() {
     if (this.state.loading) {
       this.props.getUserByName(this.props.match.params.name);
     }
   }
-  componentDidUpdate() {
+
+  componentDidUpdate(prevProps) {
     if (this.props.match.params.name && this.props.user && this.state.loading) {
       this.setState({loading: false});
     }
   }
+
   render() {
     if (this.state.loading) {
       return <div>Loading</div>
@@ -36,7 +39,7 @@ export default class UserPage extends Component {
     return (
       <React.Fragment>
         <UserInfo source={source}/>
-        <PhotoCards source={source}/>
+        <PhotoCards name={this.props.match.params.name} source={source}/>
       </React.Fragment>
     )
   }

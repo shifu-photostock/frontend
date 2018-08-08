@@ -14,6 +14,7 @@ import PhotoCards from './components/photo-cards.jsx';
 import Logout from './components/logout.jsx';
 import ProfileEdit from './components/profile-edit.jsx';
 import UserPage from './components/user-page.jsx';
+import UserRedirector from './components/user-redirector.jsx';
 import { checkLogged } from './actions/userActions';
 
 
@@ -39,6 +40,7 @@ export default class Router extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/users/:name' component={UserPage} />
+            <Route path='/fusers/:name' component={UserRedirector} />
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
             <Route path='/profile-edit' render={(props) => (

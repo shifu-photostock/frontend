@@ -16,7 +16,7 @@ function onSelect(value) {
 function renderAvatar(user) {
   return (
     <Option key={user.id}>
-      <Link to={`/users/${user.name}`}><UserAvatar name={user.name} nogrid={true}/></Link>
+      <Link to={`/fusers/${user.name}`}><UserAvatar name={user.name} nogrid={true}/></Link>
     </Option>
   );
 }
