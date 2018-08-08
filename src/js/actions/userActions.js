@@ -26,14 +26,24 @@ export function checkLogged() {
     axios.get('/')
     .then((res) => {
       console.log(res);
-      return res.data.passport;
+      return res.data;
     })
-    .then((passport) => {
-      if (passport === undefined) {
+    .then((id) => {
+      if (id.length == 0) {
         return dispatch(userNotLogged());
       }
 
-      dispatch(userLogged(passport.user));
+      axios.get(`/profile/${id}`)
+      .then((res) => {
+        console.log(res);
+        return res.data[0];
+      })
+      .then((user) => {
+        dispatch(userLogged(user));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     })
     .catch((err) => {
       console.log(err);
