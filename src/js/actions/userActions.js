@@ -80,21 +80,40 @@ export function changePassword(passwords, cb) {
   }
 }
 
+export function changeUsername(id, newName) {
+  return axios.post(`/profile/${id}/changename`, {newname: newName})
+}
+
+export function changeMail(id, newMail) {
+  return axios.post(`/profile/${id}/changemail`, {newmail: newMail})
+}
+
 export function changeUserInfo(info, cb) {
-  return (dispatch) => {
-    setTimeout(() => {
-      cb('err');
-     }, 1000);
-    /*axios.post('')
-    .then((res) => {
-      console.log(res);
+  console.log(info);
+  return (dispatch, getState) => {
+    let { user } = getState();
+    let { local } = user.data;
+    let id = user.data._id;
+
+    let reqs = [];
+
+    if (info.nickname != ocal.name) {
+      reqs.push(changeUsername(id, info.nickname));
+    }
+
+    if (info.email != local.email) {
+      reqs.push(changeMail(id, info.email));
+    }
+
+    Promise.all(reqs)
+    .then((results) => {
+      console.log(results);
       cb();
     })
     .catch((err) => {
       console.log(err);
       cb('error');
-    })*/
- 
+    })
    }
 }
 

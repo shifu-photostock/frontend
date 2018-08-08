@@ -21,20 +21,34 @@ function searchResult(query) {
   }
 }
 
+let searchCache = {};
+
 export function search(query) {
   return (dispatch) => {
+    console.log('query', query);
+    console.log('cache', searchCache);
+
     if (!query) {
-      return dispatch(searchSuccess([]));
+      return setTimeout(() => {
+        dispatch(searchSuccess([]));
+      }, 100);
     }
 
-    //dispatch(searchSuccess(searchResult(query)));
+    if (searchCache[query]) {
+      return dispatch(searchSuccess(searchCache[query]));
+    }
 
-    axios.post('/findbyname', {
-      name: query
+    axios.post('/findbychar', {
+      chars: query
     })
     .then((res) => {
       console.log(res);
-      //dispatch(searchSuccess(res.data));
+      return res.data.map((user) => user.local.name);
+    })
+    .then((users) => {
+      console.log(users);
+      searchCache[query] = users;
+      dispatch(searchSuccess(users));
     })
     .catch((err) => {
       console.log(err);

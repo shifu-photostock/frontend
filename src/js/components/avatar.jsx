@@ -7,7 +7,7 @@ const UserAvatar = (props) => (
     <span className='regular-avatar'>
       <Avatar size={64} icon='user'/>
       <span className='avatar-name'>
-        {props.user.local.name}
+        {props.name ? props.name : props.user.local.name}
       </span>
     </span>
   ) : (
@@ -16,7 +16,7 @@ const UserAvatar = (props) => (
         <Avatar size={64} icon='user' />
       </Col>
       <Col span={16}>
-        {props.user.local.name}
+        {props.name ? props.name : props.user.local.name}
       </Col>
     </Row>
   )

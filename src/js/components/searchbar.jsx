@@ -44,7 +44,6 @@ export default class SearchBar extends Component {
           dataSource={results.map(renderAvatar)}
           onSelect={onSelect}
           onChange={this.handleSearch}
-          onSearch={this.handleSearch}
           placeholder="input here"
           optionLabelProp="text"
         >
