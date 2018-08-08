@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Upload, Icon, message } from 'antd';
+import axios from '../containers/axiosApi';
 
 const Dragger = Upload.Dragger;
 
@@ -18,11 +19,12 @@ const Uploader = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ user }) => {
   return {
     name: 'file',
     multiple: true,
     action: 'http://138.68.234.86:8888/upload', 
+    data: {author: user.data._id},
     onChange: (info) => {
       const status = info.file.status;
       if (status !== 'uploading') {

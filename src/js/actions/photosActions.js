@@ -83,7 +83,7 @@ export function deleteAll() {
 export function fetchPhotos(pageNum) {
   return (dispatch, getState) => {
     
-    let { photos } = getState();
+    let { photos, user } = getState();
     let page = pageNum || photos.page;
     
     console.log('photos end', photos.end);
@@ -91,7 +91,7 @@ export function fetchPhotos(pageNum) {
       return;
     }
 
-    let path = `/carousel/${page}`;
+    let path = `/profile/${user.data._id}/carousel/${page}`;
 
     axios.get(path)
     .then((res) => {
