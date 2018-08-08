@@ -5,17 +5,22 @@ import { Link } from 'react-router-dom';
 
 import Avatar from './avatar.jsx';
 
-@connect()
 export default class UserInfo extends Component {
   constructor() {
     super();
   }
 
   render() {
+    let { source } = this.props;
     return (
       <div className='user-info'>
-        <Avatar nogrid={true} />
-        <Link to='/profile-edit'><Button className='edit-profile'>Edit profile</Button></Link>
+        <Avatar {...source} nogrid={true} />
+        {source === 'local' && 
+          <Link to='/profile-edit'>
+            <Button className='edit-profile'>
+              Edit profile
+            </Button>
+          </Link>}
       </div>
     )
   }

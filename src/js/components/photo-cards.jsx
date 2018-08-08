@@ -17,36 +17,43 @@ export default class PhotoCards extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPhotos();
-    this.props.fetchPhotos(this.props.page + 1);
+    console.log(this.props.source);
+    this.id = this.props.source && this.props.searchUser._id; 
+    let page = this.props.source && this.props.searchUserPage;
+
+    this.props.fetchPhotos(0, this.id); //can refactor first page
+    this.props.fetchPhotos(page + 1, this.id);
   }
   
   handleLoadImage() {
   }
 
   componentDidUpdate(prevProps) {
-    let { page } = this.props;
+    let page = this.props.source ? this.props.searchUserPage : this.props.page;
+    let prevPage = this.props.source ? prevProps.searchUserPage : prevProps.page;
 
-    if (page != prevProps.page) {
+    if (page != prevPage) {
       //this.props.fetchPhotos();
-      this.props.fetchPhotos(this.props.page + 1)
+      this.props.fetchPhotos(page + 1, this.id)
     }
   }
 
   loadMore() {
-    this.props.incPage();
+    console.log('load more id', this.id);
+    this.props.incPage(!!this.id);
   }
 
   render() {
-    let { photos, page } = this.props;
+    let { searchUserPhotos, photos, page, source } = this.props;
 
     console.log('slide should be', page * 5);
+    let photoSource = source === 'search' ? searchUserPhotos : photos;
     return (
       <div className='photo-cards'>
         {
-          photos.map((photo) => {
+          photoSource.map((photo) => {
             if (photo) {
-              return <Photo key={photo.src} {...photo} loadHandler={this.handleLoadImage} />
+              return <Photo key={photo.src} source={source} {...photo} loadHandler={this.handleLoadImage} />
             } else {
               return <div key={Math.random()}></div>
             }
@@ -59,20 +66,23 @@ export default class PhotoCards extends Component {
   }
 }
 
-function mapStateToProps({ photos }) {
+function mapStateToProps({ photos, search }) {
   return {
     photos: photos.list,
-    page: photos.page
+    page: photos.page,
+    searchUserPhotos: search.photos,
+    searchUser: search.user,
+    searchUserPage: search.photoPage
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchPhotos: (page) => {
-      dispatch(fetchPhotos(page));
+    fetchPhotos: (page, id) => {
+      dispatch(fetchPhotos(page, id));
     },
-    incPage: () => {
-      dispatch(incPage());
+    incPage: (custom) => {
+      dispatch(incPage(custom));
     },
     decPage: () => {
       dispatch(decPage());

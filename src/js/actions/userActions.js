@@ -63,6 +63,7 @@ export function registerUser(user) {
   }
 }
 
+
 export function changePassword(passwords, cb) {
   return (dispatch) => {
     setTimeout(() => {

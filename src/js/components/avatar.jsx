@@ -2,29 +2,41 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Avatar } from 'antd';
 
-const UserAvatar = (props) => (
-  props.nogrid ? (
-    <span className='regular-avatar'>
-      <Avatar size={64} icon='user'/>
-      <span className='avatar-name'>
-        {props.name ? props.name : props.user.local.name}
-      </span>
-    </span>
-  ) : (
-    <Row className='row-avatar' gutter={24}>
-      <Col className='col-avatar' span={8}>
-        <Avatar size={64} icon='user' />
-      </Col>
-      <Col span={16}>
-        {props.name ? props.name : props.user.local.name}
-      </Col>
-    </Row>
-  )
-);
+const UserAvatar = (props) => {
+  let name;
+  if (props.searchName) {
+    name = props.searchName;
+  } else if (props.name) {
+    name = props.name;
+  } else {
+    name = props.user && props.user.local.name;
+  }
 
-const mapStateToProps = ({ user }) => {
+  return (
+    props.nogrid ? (
+      <span className='regular-avatar'>
+        <Avatar size={64} icon='user'/>
+        <span className='avatar-name'>
+          {name}
+        </span>
+      </span>
+    ) : (
+      <Row className='row-avatar' gutter={24}>
+        <Col className='col-avatar' span={8}>
+          <Avatar size={64} icon='user' />
+        </Col>
+        <Col span={16}>
+          {name}
+        </Col>
+      </Row>
+    )
+  )
+};
+
+const mapStateToProps = ({ user, search }) => {
   return {
-    user: user.data
+    user: user.data,
+    searchName: search.user && search.user.local.name
   }
 }
 

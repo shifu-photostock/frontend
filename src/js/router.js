@@ -38,6 +38,7 @@ export default class Router extends Component {
           <Navbar />
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route path='/users/:name' component={UserPage} />
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
             <Route path='/profile-edit' render={(props) => (

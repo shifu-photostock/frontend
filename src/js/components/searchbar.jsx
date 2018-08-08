@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Icon, Button, Input, AutoComplete } from 'antd';
+import { Link } from 'react-router-dom';
 
 import { search } from '../actions/searchActions';
 import UserAvatar from './avatar.jsx';
@@ -12,11 +13,10 @@ function onSelect(value) {
 }
 
 
-
-function renderAvatar(name) {
+function renderAvatar(user) {
   return (
-    <Option key={name}>
-      <UserAvatar name={name} nogrid={true}/>
+    <Option key={user.id}>
+      <Link to={`/users/${user.name}`}><UserAvatar name={user.name} nogrid={true}/></Link>
     </Option>
   );
 }

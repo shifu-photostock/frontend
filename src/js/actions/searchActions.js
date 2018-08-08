@@ -9,6 +9,26 @@ export function searchSuccess(results) {
   }
 }
 
+export function getUserByName(name) {
+  return (dispatch) => {
+    axios.post('/findbyname', {name})
+    .then((res) => {
+      console.log(res);
+      dispatch(setFoundUser(res.data));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+export function setFoundUser(user) {
+  return {
+    type: 'SET_FOUND_USER',
+    payload: user
+  }
+}
+
 
 function searchResult(query) {
   let num = getRandomInt(1);
@@ -43,7 +63,12 @@ export function search(query) {
     })
     .then((res) => {
       console.log(res);
-      return res.data.map((user) => user.local.name);
+      return res.data.map((user) => {
+        return {
+          name: user.local.name,
+          id: user._id
+        }
+      });
     })
     .then((users) => {
       console.log(users);

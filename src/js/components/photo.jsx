@@ -49,13 +49,14 @@ export default class Photo extends Component {
   }
 
   render() {
+    let deleteAction = this.props.source ? null : <Icon onClick={this.handleClick} id='delete' type="close-circle-o" />;
     return (
       <Fragment>
         <Card
           hoverable
           style={{width: 240}}
           cover={<img onClick={this.showModal} onLoad={this.props.loadHandler} src={this.props.src} />}
-          actions={[<Icon onClick={this.handleClick} id='delete' type="close-circle-o" />,]}
+          actions={[deleteAction]}
         >
         </Card>
         <Modal 

@@ -7,27 +7,38 @@ export function fetchPhotosStart() {
   }
 }
 
-export function incPage() {
+export function incPage(custom) {
+  let type = 'INC_PAGE';
+  if (custom) type += '_S';
+
   return {
-    type: 'INC_PAGE'
+    type
   }
 }
 
-export function endReached() {
+export function endReached(custom) {
+  let type = 'PHOTOS_END_REACHED';
+  if (custom) type += '_S';
+
   return {
-    type: 'PHOTOS_END_REACHED'
+    type
   }
 }
 
-export function decPage() {
+export function decPage(custom) {
+  let type = 'DEC_PAGE';
+  if (custom) type += '_S';
   return {
-    type: 'DEC_PAGE'
+    type
   }
 }
 
-export function fetchPhotosSuccess(photos, page) {
+export function fetchPhotosSuccess(photos, page, custom) {
+  let type = 'FETCH_PHOTOS_SUCCESS';
+  if (custom) type += '_S';
+
   return {
-    type: 'FETCH_PHOTOS_SUCCESS',
+    type,
     payload: { photos, page } 
   }
 }
@@ -42,7 +53,7 @@ export function photoDeleted(id) {
 export function deletePhoto(id) {
   return (dispatch, getState) => {
     let { photos } = getState();
-    axios.delete('/files/${id}')
+    axios.delete(`/files/${id}`)
     .then((res) => {
       console.log(res);
       dispatch(photoDeleted(id));
@@ -80,18 +91,34 @@ export function deleteAll() {
   }
 }
 
-export function fetchPhotos(pageNum) {
+export function fetchPhotos(pageNum, customId) {
+  console.log('custom id', customId);
   return (dispatch, getState) => {
     
-    let { photos, user } = getState();
-    let page = pageNum || photos.page;
+    let { photos, user, search } = getState();
+    let page;
+    if (pageNum) {
+      console.log('fetch photos 1');
+      page = pageNum;
+    } else if (customId) {
+      page = search.photoPage;
+      console.log('fetch photos 2');
+    } else {
+      page = photos.page;
+      console.log('fetch photos 3');
+    }
+
+    console.log('fetch photos page', page);
+
+    let id = customId || user.data._id;
+    let photosEnd = customId ? search.photosEnd : photos.end;
     
-    console.log('photos end', photos.end);
-    if (photos.end) {
+    console.log('photos end', photosEnd);
+    if (photosEnd) {
       return;
     }
 
-    let path = `/profile/${user.data._id}/carousel/${page}`;
+    let path = `/profile/${id}/carousel/${page}`;
 
     axios.get(path)
     .then((res) => {
@@ -106,11 +133,11 @@ export function fetchPhotos(pageNum) {
       }));
     })
     .then((urls) => {
-      dispatch(fetchPhotosSuccess(urls, page));
+      dispatch(fetchPhotosSuccess(urls, page, !!customId));
     })
     .catch((err) => {
       console.log(err);
-      dispatch(endReached());
+      dispatch(endReached(!!customId));
     })
   }
 }
