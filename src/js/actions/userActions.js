@@ -75,11 +75,14 @@ export function registerUser(user) {
 
 
 export function changePassword(passwords, cb) {
-  return (dispatch) => {
-    setTimeout(() => {
-      cb('err');
-    }, 1000);
-    /*axios.post('')
+  return (dispatch, getState) => {
+    let id = getState().user.data._id;
+    console.log('password', passwords);
+
+    axios.post(`/profile/${id}/changepassword`, {
+      oldpassword: passwords.oldPassword,
+      newpassword: passwords.newPassword
+    })
     .then((res) => {
       console.log(res);
       cb();
@@ -87,7 +90,7 @@ export function changePassword(passwords, cb) {
     .catch((err) => {
       console.log(err);
       cb('error');
-    })*/
+    })
   }
 }
 
@@ -108,7 +111,7 @@ export function changeUserInfo(info, cb) {
 
     let reqs = [];
 
-    if (info.nickname != ocal.name) {
+    if (info.nickname != local.name) {
       reqs.push(changeUsername(id, info.nickname));
     }
 

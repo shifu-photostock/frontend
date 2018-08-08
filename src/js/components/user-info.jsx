@@ -15,7 +15,7 @@ export default class UserInfo extends Component {
     return (
       <div className='user-info'>
         <Avatar {...source} nogrid={true} />
-        {source === 'local' && 
+        {!source && 
           <Link to='/profile-edit'>
             <Button className='edit-profile'>
               Edit profile
