@@ -37,6 +37,7 @@ export function checkLogged() {
     })
     .catch((err) => {
       console.log(err);
+      dispatch(userNotLogged());
     })
   }
 }
