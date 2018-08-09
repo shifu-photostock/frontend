@@ -53,9 +53,11 @@ export default class UserAvatar extends Component {
     }
     
     let src = null;
-    if (props.src) {
+    if (props.src && props.src !== 'no-avatar') {
       src = props.src;
       console.log('PROPS.SRC', src);
+    } else if (props.src === 'no-avatar') {
+      src = null;
     } else if (props.user && props.user.local.avatar && props.localSource) {
       src = `${SERVER}/image/${props.user.local.avatar}`;
     } else if (props.searchUser && props.searchUser.local.avatar && !props.localSource) {
@@ -69,7 +71,7 @@ export default class UserAvatar extends Component {
                  <Avatar src={src} size={64} />
                </span>);
     } else {
-      avatar = <Avatar size={64} icon={'user'} />;
+      avatar = <Avatar size={64} icon='user' />;
     }
 
     return (
