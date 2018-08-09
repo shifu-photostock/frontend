@@ -191,6 +191,13 @@ html, body, #root {
   margin-top: 15px;
 }
 
+.user-info .logout-profile {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
 .user-info .avatar-name {
   vertical-align: top;
   margin-left: 50px;

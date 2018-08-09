@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 
 import Avatar from './avatar.jsx';
 import AvatarUpload from './avatar-upload.jsx';
+import { logoutUser } from '../actions/userActions';
 
+@connect(null, mapDispatchToProps)
 export default class UserInfo extends Component {
   constructor() {
     super();
@@ -23,8 +25,19 @@ export default class UserInfo extends Component {
               Edit profile
             </Button>
           </Link>}
+        {!source && 
+          <Button type='danger' onClick={this.props.logout} className='logout-profile'>
+            Logout
+          </Button>}
       </div>
     )
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => {
+      dispatch(logoutUser());
+    }
+  }
+}

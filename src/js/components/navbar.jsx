@@ -9,47 +9,45 @@ import SearchBar from './searchbar.jsx';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(mapStateToProps)
 export default class Navbar extends Component {
   constructor() {
     super();
+
+    this.state = {
+      current: 'logo'
+    }
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick({ key }) {
-    switch(key) {
-    case 'logout':
-      this.props.logout();
-      break;
-    }
+    this.setState({ current: key });
   }
 
   render() {
     let { logged } = this.props;
     return (
       <div className='navbar-wrapper'>
-        <Menu className='navbar' onClick={this.handleClick} mode="horizontal">
-          <Menu.Item className='logo'>
+        <Menu className='navbar' onClick={this.handleClick} mode='horizontal' selectedKeys={[this.state.current]}>
+          <Menu.Item key='logo' className='logo'>
             <Link to='/'><Icon type='camera-o' /></Link>
           </Menu.Item>
           <SearchBar />
           {logged && 
-          <SubMenu className='profile-submenu' title={<Link to='/profile'><Icon type="user" />Profile</Link>} >
-            <Menu.Item className='submenu-item' key="logout">
-              <Icon type="logout" />Logout
-            </Menu.Item>
-          </SubMenu>}
+          <Menu.Item key='profile'>
+            <Link to='/profile'><Icon type='user'/>Profile</Link>
+          </Menu.Item>}
           {!logged && 
-          <Menu.Item>
+          <Menu.Item key='register'>
             <Link className='primary' to='/register'>Sign up</Link>
           </Menu.Item>}
           {!logged && 
-          <Menu.Item>
+          <Menu.Item key='login'>
             <Link to='/login'><Icon type="login" />Login</Link>
           </Menu.Item>}
           {logged && 
-          <Menu.Item>
+          <Menu.Item key='upload'>
             <Link to='/upload'><Icon type="cloud-upload-o" />Upload</Link>
           </Menu.Item>}
           {logged && 
@@ -70,13 +68,5 @@ export default class Navbar extends Component {
 function mapStateToProps({ user }) {
   return {
     logged: !!user.data
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    logout: () => {
-      dispatch(logoutUser());
-    }
   }
 }
