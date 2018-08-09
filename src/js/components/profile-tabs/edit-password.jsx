@@ -110,7 +110,7 @@ class RegistrationForm extends Component {
 
     return (
       <Form onChange={this.onChange} onSubmit={this.handleSubmit}>
-        <UserAvatar />
+        <UserAvatar localSource={true}/>
 
         <FormItem
           {...formItemLayout}
