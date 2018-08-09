@@ -239,3 +239,26 @@ html, body, #root {
   width: 27px;
   height: 27px;
 }
+
+.row-name {
+  font-size: 20px;  
+  margin-top: -4px;
+}
+
+.row-avatar-options {
+  font-size: 13px;
+  margin-top: -7px;
+}
+
+.avatar-options-modal .avatar-uploader {
+  display: block;
+}
+
+.avatar-options-modal .ant-upload, .delete, .cancel {
+  width: 30%;
+  margin: 5px 0;
+} 
+
+.avatar-options-modal .ant-upload button {
+  width: 100%;
+}

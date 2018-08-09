@@ -43,20 +43,20 @@ export function fetchPhotosSuccess(photos, page, custom) {
   }
 }
 
-export function photoDeleted(id) {
+export function photoDeleted(filename) {
   return {
     type: 'DELETE_PHOTO',
-    payload: id
+    payload: filename 
   }
 }
 
-export function deletePhoto(id) {
+export function deletePhoto(filename) {
   return (dispatch, getState) => {
     let { photos } = getState();
-    axios.delete(`/files/${id}`)
+    axios.delete(`/images/${filename}`)
     .then((res) => {
       console.log(res);
-      dispatch(photoDeleted(id));
+      dispatch(photoDeleted(filename));
       dispatch(fetchPhotos(photos.page + 1));
     })
     .catch((err) => {
@@ -129,7 +129,8 @@ export function fetchPhotos(pageNum, customId) {
       console.log(photos);
       return photos.map((photo) => ({
         src: `http://138.68.234.86:8888/image/${photo.filename}`,
-        id: photo._id
+        id: photo._id,
+        filename: photo.filename
       }));
     })
     .then((urls) => {

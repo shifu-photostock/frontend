@@ -22,10 +22,11 @@ export default class Photo extends Component {
   }
 
   handleClick(e) {
+    console.log('DAS IS PROPS', this.props);
     switch(e.target.id) {
     case 'delete':
-      console.log('delete', this.props.id);
-      this.props.delete(this.props.id);
+      console.log('delete', this.props.filename);
+      this.props.delete(this.props.filename);
       break;
     }
   }

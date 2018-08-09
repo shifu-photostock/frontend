@@ -10,8 +10,14 @@ const userReducer = (state=initialState, action) => {
     break;
   case 'USER_NOT_LOGGED':
     state = {...state, data: null}
+    break;
   case 'USER_LOGGED_OUT':
     state = {...state, data: null}
+    break;
+  case 'AVATAR_DELETED':
+    let newLocal = {...state.data.local, avatar: null};
+    let newData = {...state.data, local: newLocal};
+    state = {...state, data: newData}
   }
   return state;
 };

@@ -86,7 +86,7 @@ class RegistrationForm extends Component {
 
     return (
       <Form onChange={this.onChange} onSubmit={this.handleSubmit}>
-        <UserAvatar name={this.props.form.getFieldValue('nickname')}  /> 
+        <UserAvatar localSource={true} canChange={true} name={this.props.form.getFieldValue('nickname')}  /> 
         <FormItem
           {...formItemLayout}
           label="E-mail"

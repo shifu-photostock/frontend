@@ -66,7 +66,8 @@ export function search(query) {
       return res.data.map((user) => {
         return {
           name: user.local.name,
-          id: user._id
+          id: user._id,
+          avatar: user.local.avatar
         }
       });
     })

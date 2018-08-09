@@ -14,9 +14,15 @@ function onSelect(value) {
 
 
 function renderAvatar(user) {
+  console.log('USERSSS', user);
   return (
     <Option key={user.id}>
-      <Link to={`/fusers/${user.name}`}><UserAvatar name={user.name} nogrid={true}/></Link>
+      <Link to={`/fusers/${user.name}`}>
+        <UserAvatar 
+          src={user.avatar && `http://138.68.234.86:8888/image/${user.avatar}`}
+          name={user.name}
+          nogrid={true}/>
+      </Link>
     </Option>
   );
 }

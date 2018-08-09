@@ -1,7 +1,6 @@
 'use strict'
 import axios from '../containers/axiosApi.js';
 
-
 export function userLogged(user) {
   return {
     type: 'USER_LOGGED',
@@ -32,8 +31,20 @@ export function checkLogged() {
       if (id.length == 0) {
         return dispatch(userNotLogged());
       }
+      dispatch(updateUser(id));
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(userNotLogged());
+    })
+  }
+}
 
-      axios.get(`/profile/${id}`)
+export function updateUser(id) {
+  return (dispatch, getState) => {
+    let uid = id ? id : getState().user.data._id;  
+
+    axios.get(`/profile/${uid}`)
       .then((res) => {
         console.log(res);
         return res.data[0];
@@ -44,11 +55,6 @@ export function checkLogged() {
       .catch((err) => {
         console.log(err);
       })
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch(userNotLogged());
-    })
   }
 }
 

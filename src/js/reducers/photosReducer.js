@@ -40,9 +40,9 @@ const photosReducer = (state=initialState, action) => {
   case 'DELETE_PHOTO':
     list = list.filter((photo) => {
       if (!photo) return;
-      let id = typeof photo === undefined ? null : photo.id;
+      let filename = typeof photo === undefined ? null : photo.filename;
 
-      if (id === action.payload) {
+      if (filename === action.payload) {
         return false;
       }
       return true;

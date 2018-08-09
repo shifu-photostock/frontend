@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 
 import Avatar from './avatar.jsx';
+import AvatarUpload from './avatar-upload.jsx';
 
 export default class UserInfo extends Component {
   constructor() {
@@ -14,7 +15,8 @@ export default class UserInfo extends Component {
     let { source } = this.props;
     return (
       <div className='user-info'>
-        <Avatar {...source} nogrid={true} />
+        <Avatar localSource={!source} {...source} nogrid={true} />
+
         {!source && 
           <Link to='/profile-edit'>
             <Button className='edit-profile'>
