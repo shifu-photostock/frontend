@@ -128,6 +128,7 @@ export function changeUserInfo(info, cb) {
     Promise.all(reqs)
     .then((results) => {
       console.log(results);
+      dispatch(updateUser());
       cb();
     })
     .catch((err) => {
