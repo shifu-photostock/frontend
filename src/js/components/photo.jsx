@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, Icon, Modal } from 'antd'
 
 import { deletePhoto } from '../actions/photosActions';
+import PhotoModal from './photo-modal.jsx';
 
 const { Meta } = Card;
 
@@ -60,21 +61,10 @@ export default class Photo extends Component {
           actions={[deleteAction]}
         >
         </Card>
-        <Modal 
-          className='photo-modal'
-          visible={this.state.visible}
-          bodyStyle={{padding: '10px'}}
-          footer={null}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          width='auto'
-          centered={true}
-        >
+        <PhotoModal onOk={this.handleOk} onCancel={this.handleCancel} visible={this.state.visible}>
           <img onLoad={this.props.loadHandler} src={this.props.src} />
-        </Modal>
-
+        </PhotoModal>
       </Fragment>
-
     )
   }
 };
