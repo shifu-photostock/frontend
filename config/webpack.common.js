@@ -42,9 +42,9 @@ let config = {
         })
       },
       {
-        test: /\.(woff(2)?|ttf|eot|jpg|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|jpg|svg|ico)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
-          'file-loader' 
+          'file-loader?name=[name].[ext]' 
         ]
       }
     ]

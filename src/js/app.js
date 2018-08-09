@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import '../css/reset.css';
 import '../css/style.css';
+import '../favicon.ico';
 
 import store from './containers/store';
 import Router from './router';
