@@ -44,7 +44,7 @@ export default class PhotoCards extends Component {
   }
 
   render() {
-    let { searchUserPhotos, photos, page, source } = this.props;
+    let { searchUserPhotos, photos, page, source, photosEnd, searchPhotosEnd } = this.props;
 
     console.log('slide should be', page * 5);
     let photoSource = source === 'search' ? searchUserPhotos : photos;
@@ -60,7 +60,7 @@ export default class PhotoCards extends Component {
           })
         }
         <br/>
-        <Button onClick={this.loadMore}>Load more</Button>
+        <Button disabled={source === 'search' ? searchPhotosEnd : photosEnd} onClick={this.loadMore}>Load more</Button>
       </div>
     );
   }
@@ -72,7 +72,9 @@ function mapStateToProps({ photos, search }) {
     page: photos.page,
     searchUserPhotos: search.photos,
     searchUser: search.user,
-    searchUserPage: search.photoPage
+    searchUserPage: search.photoPage,
+    photosEnd: photos.end,
+    searchPhotosEnd: search.photosEnd
   }
 }
 
