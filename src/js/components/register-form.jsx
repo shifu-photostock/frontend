@@ -98,7 +98,7 @@ class RegistrationForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormItem
             {...formItemLayout}
-            label="E-mail"
+            label='E-mail'
           >
             {getFieldDecorator('email', {
               rules: [{
@@ -112,7 +112,7 @@ class RegistrationForm extends Component {
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label="Password"
+            label='Password'
           >
             {getFieldDecorator('password', {
               rules: [{
@@ -121,12 +121,12 @@ class RegistrationForm extends Component {
                 validator: this.validateToNextPassword,
               }],
             })(
-              <Input type="password" />
+              <Input type='password' />
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label="Confirm Password"
+            label='Confirm Password'
           >
             {getFieldDecorator('confirm', {
               rules: [{
@@ -135,7 +135,7 @@ class RegistrationForm extends Component {
                 validator: this.compareToFirstPassword,
               }],
             })(
-              <Input type="password" onBlur={this.handleConfirmBlur} />
+              <Input type='password' onBlur={this.handleConfirmBlur} />
             )}
           </FormItem>
           <FormItem
@@ -143,8 +143,8 @@ class RegistrationForm extends Component {
             label={(
               <span>
                 Nickname&nbsp;
-                <Tooltip title="What do you want others to call you?">
-                  <Icon type="question-circle-o" />
+                <Tooltip title='What do you want others to call you?'>
+                  <Icon type='question-circle-o' />
                 </Tooltip>
               </span>
             )}
@@ -171,7 +171,7 @@ class RegistrationForm extends Component {
             )}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button disabled={!this.state.agreement} type="primary" htmlType="submit">Register</Button>
+            <Button disabled={!this.state.agreement} type='primary' htmlType='submit'>Register</Button>
           </FormItem>
         </Form>
       </div>
@@ -181,7 +181,7 @@ class RegistrationForm extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: !!user.data
+    logged: !!user.id
   }
 }
 

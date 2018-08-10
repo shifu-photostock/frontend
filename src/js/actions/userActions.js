@@ -1,10 +1,15 @@
 'use strict'
 import axios from '../containers/axiosApi.js';
 
+import { showMessage } from './uiActions';
+
 export function userLogged(user) {
   return {
     type: 'USER_LOGGED',
-    payload: user
+    payload: {
+      ...user.local,
+      id: user._id
+    }
   }
 }
 
@@ -31,7 +36,7 @@ export function checkLogged() {
       if (id.length == 0) {
         return dispatch(userNotLogged());
       }
-      dispatch(updateUser(id));
+      dispatch(getUser(id));
     })
     .catch((err) => {
       console.log(err);
@@ -40,9 +45,9 @@ export function checkLogged() {
   }
 }
 
-export function updateUser(id) {
+export function getUser(id) {
   return (dispatch, getState) => {
-    let uid = id ? id : getState().user.data._id;  
+    let uid = id ? id : getState().user.id;  
 
     axios.get(`/profile/${uid}`)
       .then((res) => {
@@ -80,10 +85,9 @@ export function registerUser(user) {
 }
 
 
-export function changePassword(passwords, cb) {
+export function changePassword(passwords) {
   return (dispatch, getState) => {
-    let id = getState().user.data._id;
-    console.log('password', passwords);
+    let id = getState().user.id;
 
     axios.post(`/profile/${id}/changepassword`, {
       oldpassword: passwords.oldPassword,
@@ -91,11 +95,11 @@ export function changePassword(passwords, cb) {
     })
     .then((res) => {
       console.log(res);
-      cb();
+      dispatch(showMessage('password update success!', 'success'));
     })
     .catch((err) => {
       console.log(err);
-      cb('error');
+      dispatch(showMessage('password update failed!', 'error'));
     })
   }
 }
@@ -112,28 +116,28 @@ export function changeUserInfo(info, cb) {
   console.log(info);
   return (dispatch, getState) => {
     let { user } = getState();
-    let { local } = user.data;
-    let id = user.data._id;
+
+    let id = user.id;
 
     let reqs = [];
 
-    if (info.nickname != local.name) {
+    if (info.nickname != user.name) {
       reqs.push(changeUsername(id, info.nickname));
     }
 
-    if (info.email != local.email) {
+    if (info.email != user.email) {
       reqs.push(changeMail(id, info.email));
     }
 
     Promise.all(reqs)
     .then((results) => {
       console.log(results);
-      dispatch(updateUser());
-      cb();
+      dispatch(getUser());
+      dispatch(showMessage('successfull save!', 'success'));
     })
     .catch((err) => {
       console.log(err);
-      cb('error');
+      dispatch(showMessage('save failed!', 'error'));
     })
    }
 }

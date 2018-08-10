@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { Spin } from 'antd';
 
 import Home from './components/home.jsx';
@@ -14,9 +15,10 @@ import PhotoCards from './components/photo-cards.jsx';
 import Logout from './components/logout.jsx';
 import ProfileEdit from './components/profile-edit.jsx';
 import UserPage from './components/user-page.jsx';
-import UserRedirector from './components/user-redirector.jsx';
+import PhotoModal from './components/photo-modal.jsx';
+import Message from './components/message.jsx';
 import { checkLogged } from './actions/userActions';
-
+import { history } from './containers/store';
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Router extends Component {
@@ -24,23 +26,28 @@ export default class Router extends Component {
     this.props.checkLogged();
   }
 
-  render() {
-    let { logged, data } = this.props;
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
 
-    if (data === 'loading') {
+    }
+  }
+
+  render() {
+    let { logged, status } = this.props;
+
+    if (status === 'loading') {
       return (
         <Spin size='large' className='initial-load-spin'/>
       )
     }
 
     return (
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Fragment>
           <Navbar />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/users/:name' component={UserPage} />
-            <Route path='/fusers/:name' component={UserRedirector} />
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
             <Route path='/profile-edit' render={(props) => (
@@ -64,16 +71,18 @@ export default class Router extends Component {
                 <Redirect to='/' />
             )} />
           </Switch>
+          <PhotoModal />
+          <Message />
         </Fragment>
-      </BrowserRouter> 
+      </ConnectedRouter> 
     )
   }
 }
 
 function mapStateToProps({ user }) {
   return {
-    logged: !!user.data,
-    data: user.data
+    logged: !!user.id,
+    status: user.status 
   }
 }
 

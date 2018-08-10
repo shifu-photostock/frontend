@@ -17,9 +17,9 @@ function renderAvatar(user) {
   console.log('USERSSS', user);
   return (
     <Option key={user.id}>
-      <Link to={`/fusers/${user.name}`}>
+      <Link to={`/users/${user.name}`}>
         <UserAvatar 
-          src={user.avatar ? `http://138.68.234.86:8888/image/${user.avatar}` : 'no-avatar'}
+          src={user.avatar ? `http://138.68.234.86:8888/image/${user.avatar}` : null}
           name={user.name}
           nogrid={true}/>
       </Link>
@@ -43,17 +43,17 @@ export default class SearchBar extends Component {
     const { results } = this.props;
     console.log(results);
     return (
-      <div className="search-wrapper" style={{ width: 300 }}>
+      <div className='search-wrapper' style={{ width: 300 }}>
         <AutoComplete
-          className="global-search"
+          className='global-search'
           style={{ width: '100%' }}
           dataSource={results.map(renderAvatar)}
           onSelect={onSelect}
           onChange={this.handleSearch}
-          placeholder="input here"
-          optionLabelProp="text"
+          placeholder='input here'
+          optionLabelProp='text'
         >
-          <Input suffix={<Icon type="search" />} />
+          <Input suffix={<Icon type='search' />} />
         </AutoComplete>
       </div>
     );

@@ -7,30 +7,36 @@ import Avatar from './avatar.jsx';
 import AvatarUpload from './avatar-upload.jsx';
 import { logoutUser } from '../actions/userActions';
 
-@connect(null, mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class UserInfo extends Component {
   constructor() {
     super();
   }
 
   render() {
-    let { source } = this.props;
+    let { isStranger } = this.props;
     return (
       <div className='user-info'>
-        <Avatar localSource={!source} {...source} nogrid={true} />
+        <Avatar nogrid={true} />
 
-        {!source && 
+        {!isStranger && 
           <Link to='/profile-edit'>
             <Button className='edit-profile'>
               Edit profile
             </Button>
           </Link>}
-        {!source && 
+        {!isStranger && 
           <Button type='danger' onClick={this.props.logout} className='logout-profile'>
             Logout
           </Button>}
       </div>
     )
+  }
+}
+
+function mapStateToProps({ router }) {
+  return {
+    isStranger: router.location.pathname.includes('/users/')
   }
 }
 

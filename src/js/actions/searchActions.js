@@ -45,8 +45,6 @@ let searchCache = {};
 
 export function search(query) {
   return (dispatch) => {
-    console.log('query', query);
-    console.log('cache', searchCache);
 
     if (!query) {
       return setTimeout(() => {
@@ -72,7 +70,6 @@ export function search(query) {
       });
     })
     .then((users) => {
-      console.log(users);
       searchCache[query] = users;
       dispatch(searchSuccess(users));
     })

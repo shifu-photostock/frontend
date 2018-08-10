@@ -44,18 +44,18 @@ export default class Navbar extends Component {
           </Menu.Item>}
           {!logged && 
           <Menu.Item key='login'>
-            <Link to='/login'><Icon type="login" />Login</Link>
+            <Link to='/login'><Icon type='login' />Login</Link>
           </Menu.Item>}
           {logged && 
           <Menu.Item key='upload'>
-            <Link to='/upload'><Icon type="cloud-upload-o" />Upload</Link>
+            <Link to='/upload'><Icon type='cloud-upload-o' />Upload</Link>
           </Menu.Item>}
           {logged && 
-          <SubMenu title={<span><Icon type="picture" />Gallery</span>}>
-            <Menu.Item className='submenu-item' key="Carousel">
+          <SubMenu title={<span><Icon type='picture' />Gallery</span>}>
+            <Menu.Item className='submenu-item' key='Carousel'>
               <Link to='/gallery/carousel'>Carousel</Link>
             </Menu.Item>
-            <Menu.Item className='submenu-item' key="Cards">
+            <Menu.Item className='submenu-item' key='Cards'>
               <Link to='/gallery/cards'>Cards</Link>
             </Menu.Item>
           </SubMenu>}
@@ -67,6 +67,6 @@ export default class Navbar extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: !!user.data
+    logged: !!user.id
   }
 }

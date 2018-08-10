@@ -1,45 +1,54 @@
 import axios from '../containers/axiosApi';
 import { checkLogged } from './userActions.js';
 
-export function fetchPhotosStart() {
+export function incUserPage() {
   return {
-    type: 'FETCH_PHOTOS_START'
+    type: 'INC_USER_PAGE'
   }
 }
 
-export function incPage(custom) {
-  let type = 'INC_PAGE';
-  if (custom) type += '_S';
-
+export function incStrangerPage() {
   return {
-    type
+    type: 'INC_STRANGER_PAGE'
   }
 }
 
-export function endReached(custom) {
-  let type = 'PHOTOS_END_REACHED';
-  if (custom) type += '_S';
-
+export function endUserPhotos() {
   return {
-    type
+    type: 'USER_PHOTOS_END'
   }
 }
 
-export function decPage(custom) {
-  let type = 'DEC_PAGE';
-  if (custom) type += '_S';
+export function endStrangerPhotos() {
   return {
-    type
+    type: 'STRANGER_PHOTOS_END'
   }
 }
 
-export function fetchPhotosSuccess(photos, page, custom) {
-  let type = 'FETCH_PHOTOS_SUCCESS';
-  if (custom) type += '_S';
-
+export function decUserPage() {
   return {
-    type,
-    payload: { photos, page } 
+    type: 'DEC_USER_PAGE'
+  }
+}
+
+export function decStrangerPage() {
+  return {
+    type: 'DEC_STRANGER_PAGE'
+  }
+}
+
+
+export function fetchUserPhotosSuccess(photos, page) {
+  return {
+    type: 'FETCH_USER_PHOTOS_SUCCESS',
+    payload: { list: photos, page } 
+  }
+}
+
+export function fetchStrangerPhotosSuccess(photos, page, custom) {
+  return {
+    type: 'FETCH_STRANGER_PHOTOS_SUCCESS',
+    payload: { list: photos, page } 
   }
 }
 
@@ -72,7 +81,6 @@ export function deleteAll() {
       return res.data.files;
     })
     .then((photos) => {
-      console.log(photos);
       return photos.map((photo) => (
         photo._id
       ))
@@ -91,34 +99,19 @@ export function deleteAll() {
   }
 }
 
-export function fetchPhotos(pageNum, customId) {
-  console.log('custom id', customId);
+export function fetchPhotos(page) {
   return (dispatch, getState) => {
-    
-    let { photos, user, search } = getState();
-    let page;
-    if (pageNum) {
-      console.log('fetch photos 1');
-      page = pageNum;
-    } else if (customId) {
-      page = search.photoPage;
-      console.log('fetch photos 2');
-    } else {
-      page = photos.page;
-      console.log('fetch photos 3');
-    }
+    let { photos, user, stranger, router } = getState();
 
-    console.log('fetch photos page', page);
-
-    let id = customId || user.data._id;
-    let photosEnd = customId ? search.photosEnd : photos.end;
+    let isStranger = router.location.pathname.includes('/users/');
+    let uid = isStranger ? stranger.id : user.id;
+    let photosEnd = isStranger ? stranger.photosEnd : user.end;
     
-    console.log('photos end', photosEnd);
     if (photosEnd) {
       return;
     }
 
-    let path = `/profile/${id}/carousel/${page}`;
+    let path = `/profile/${uid}/carousel/${page}`;
 
     axios.get(path)
     .then((res) => {
@@ -134,11 +127,19 @@ export function fetchPhotos(pageNum, customId) {
       }));
     })
     .then((urls) => {
-      dispatch(fetchPhotosSuccess(urls, page, !!customId));
+      if (isStranger) {
+        dispatch(fetchStrangerPhotosSuccess(urls, page));
+      } else {
+        dispatch(fetchUserPhotosSuccess(urls, page));
+      }
     })
     .catch((err) => {
       console.log(err);
-      dispatch(endReached(!!customId));
+      if (isStranger) {
+        dispatch(endStrangerPhotos());
+      } else {
+        dispatch(endUserPhotos());
+      }
     })
   }
 }

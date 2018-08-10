@@ -26,7 +26,6 @@ export default class AvatarOptionsModal extends Component {
   }
 
   handleCancel(e) {
-    console.log(e);
     this.setState({
       visible: false,
     });
@@ -42,7 +41,7 @@ export default class AvatarOptionsModal extends Component {
       <div>
         <a onClick={this.showModal}>edit avatar</a>
         <Modal
-          title="Change Avatar"
+          title='Change Avatar'
           className='avatar-options-modal'
           visible={this.state.visible}
           onCancel={this.handleCancel}

@@ -24,7 +24,6 @@ class RegistrationForm extends Component {
     this.handleConfirmBlur = this.handleConfirmBlur.bind(this); 
     this.compareToFirstPassword = this.compareToFirstPassword.bind(this);
     this.validateToNextPassword = this.validateToNextPassword.bind(this);
-    this.handleAnswer = this.handleAnswer.bind(this);
   }
 
   handleSubmit(e) {
@@ -33,16 +32,6 @@ class RegistrationForm extends Component {
     let data = form.getFieldsValue();
     console.log('Received values of form: ', data);
     this.props.changePassword(data, this.handleAnswer);
-  }
-
-  handleAnswer(err) {
-    const { form } = this.props;
-    if (err) {
-      form.resetFields();
-      return message.error('password update failed!');
-    } 
-
-    message.success('password update success!');
   }
 
   onChange() {

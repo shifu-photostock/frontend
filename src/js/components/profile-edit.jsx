@@ -7,13 +7,11 @@ const TabPane = Tabs.TabPane;
 import EditProfile from './profile-tabs/edit-profile.jsx';
 import EditPassword from './profile-tabs/edit-password.jsx';
 
-@connect(mapStateToProps, mapDispatchToProps)
 export default class Profile extends Component {
   constructor() {
     super();
   }
   render() {
-    let { local } = this.props.user;
     return (
       <div className='profile-edit-wrapper'>
         <Tabs
@@ -21,31 +19,15 @@ export default class Profile extends Component {
           tabPosition='left'
           style={{ height: 300 }}
         >
-
-          <TabPane tab="Edit profile" key="1">
+          <TabPane tab='Edit profile' key='1'>
             <EditProfile />
           </TabPane>
-          <TabPane tab="Change password" key="2">
+          <TabPane tab='Change password' key='2'>
             <EditPassword />
           </TabPane>
         </Tabs>
       </div>
     );
-  }
-}
-
-function mapStateToProps({ user }) {
-  return {
-    logged: !!user.data,
-    user: user.data
-  }
-}
-
-function mapDispatchToProps(dispatch) { 
-  return {
-    registerUser: (user) => {
-      dispatch(registerUser(user));
-    }
   }
 }
 

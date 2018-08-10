@@ -24,7 +24,7 @@ const mapStateToProps = ({ user }) => {
     name: 'file',
     multiple: true,
     action: 'http://138.68.234.86:8888/upload', 
-    data: {author: user.data._id},
+    data: {author: user.id},
     onChange: (info) => {
       const status = info.file.status;
       if (status !== 'uploading') {

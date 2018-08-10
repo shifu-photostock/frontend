@@ -1,16 +1,18 @@
 'use strict'
 import { combineReducers } from 'redux';
 
-import photosReducer from './photosReducer';
-import userReducer from './userReduces';
+import userReducer from './userReducer';
 import searchReducer from './searchReducer';
 import avatarReducer from './avatarReducer';
+import strangerReducer from './strangerReducer';
+import uiReducer from './uiReducer';
 
 let reducer = combineReducers({
-  photos: photosReducer,
   user: userReducer,
   search: searchReducer,
-  avatar: avatarReducer
+  avatar: avatarReducer,
+  stranger: strangerReducer,
+  ui: uiReducer
 });
 
 export default reducer;

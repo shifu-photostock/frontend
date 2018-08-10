@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Upload, Icon, message } from 'antd';
 
 import { uploadStart, uploadEnd } from '../actions/avatarActions';
-import { updateUser } from '../actions/userActions';
+import { getUser } from '../actions/userActions';
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -57,10 +57,10 @@ export default class AvatarUpload extends Component {
     return (
       <Upload
         name='file'
-        className="avatar-uploader"
+        className='avatar-uploader'
         showUploadList={false}
         action='http://138.68.234.86:8888/uploadavatar'
-        data={{author: user._id}}
+        data={{author: user.id}}
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
       >
@@ -72,7 +72,7 @@ export default class AvatarUpload extends Component {
 
 function mapStateToProps({ user }) {
   return {
-    user: user.data
+    user
   }
 }
 
@@ -85,7 +85,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(uploadEnd());
     },
     updateUser: () => {
-      dispatch(updateUser());
+      dispatch(getUser());
     }
   }
 }

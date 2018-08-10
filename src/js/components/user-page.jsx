@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import UserInfo from './user-info.jsx';
 import PhotoCards from './photo-cards.jsx';
-import { getUserByName } from '../actions/searchActions';
+
+import { getStranger } from '../actions/strangerActions';
 
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -11,50 +12,50 @@ export default class UserPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: !!props.match.params.name
-    }
   }
 
   componentDidMount() {
-    if (this.state.loading) {
-      this.props.getUserByName(this.props.match.params.name);
+    if (this.props.isStranger) {
+      this.props.getStranger(this.props.match.params.name);
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.name && this.props.user && this.state.loading) {
-      this.setState({loading: false});
+    let { stranger, route, getStranger, match } = this.props;
+
+    if (!route.includes('/users')) return;
+
+    if (route !== prevProps.route) {
+      return getStranger(match.params.name);
     }
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.props.isStranger && this.props.stranger.loading) {
       return <div>Loading</div>
     }
 
-    let source = this.props.match.params.name ? 'search' : null;
-    console.log('source', source);
-
     return (
-      <React.Fragment>
-        <UserInfo source={source}/>
-        <PhotoCards name={this.props.match.params.name} source={source}/>
-      </React.Fragment>
+      <Fragment>
+        <UserInfo/>
+        <PhotoCards/>
+      </Fragment>
     )
   }
 };
 
-function mapStateToProps({ search }) {
+function mapStateToProps({ search, router, stranger }) {
   return {
-    user: search.user
+    stranger,
+    isStranger: router.location.pathname.includes('/users/'),
+    route: router.location.pathname,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getUserByName: (name) => {
-      dispatch(getUserByName(name));
+    getStranger: (name) => {
+      dispatch(getStranger(name));
     }
   }
 }

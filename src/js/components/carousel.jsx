@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Carousel from 'nuka-carousel';
 
-import { fetchPhotos, incPage, decPage } from '../actions/photosActions';
+import 
+{ fetchPhotos, incUserPage, incStrangerPage,  decStrangerPage, decUserPage }
+from '../actions/photosActions';
 import Photo from './photo.jsx';
 
 
@@ -16,8 +18,8 @@ export default class PhotoCarousel extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchPhotos();
-    this.props.fetchPhotos(this.props.page + 1)
+    this.props.fetchPhotos(0);
+    this.props.fetchPhotos(1)
   }
   
   handleLoadImage() {
@@ -34,11 +36,11 @@ export default class PhotoCarousel extends Component {
   }
 
   incSlide(cb) {
-    this.props.incPage();
+    this.props.incUserPage();
   }
 
   decSlide(cb) {
-    this.props.decPage();
+    this.props.decUserPage();
   }
 
   render() {
@@ -53,16 +55,11 @@ export default class PhotoCarousel extends Component {
       cursor: 'pointer',
     };
 
-    console.log('slide should be', page * 5);
     const settings = {
-      afterSlide: slide => {
-        console.log('but current slide', slide);
-      },
       slideIndex: page * 5,
       slidesToShow: 5,
       slidesToScroll: 5,
       initialSlideHeight: 200,
-      //renderBottomCenterControls: false,
       cellSpacing: 20,
       renderBottomCenterControls: null,
       renderCenterRightControls: ({ nextSlide, prevSlide, goToSlide }) => {
@@ -103,10 +100,10 @@ export default class PhotoCarousel extends Component {
   }
 }
 
-function mapStateToProps({ photos }) {
+function mapStateToProps({ user }) {
   return {
-    photos: photos.list,
-    page: photos.page
+    photos: user.photos,
+    page: user.page
   }
 }
 
@@ -115,11 +112,14 @@ function mapDispatchToProps(dispatch) {
     fetchPhotos: (page) => {
       dispatch(fetchPhotos(page));
     },
-    incPage: () => {
-      dispatch(incPage());
+    incUserPage: () => {
+      dispatch(incUserPage());
     },
-    decPage: () => {
-      dispatch(decPage());
+    incStrangerPage: () => {
+      dispatch(incStrangerPage());
+    },
+    decUserPage: () => {
+      dispatch(decUserPage());
     }
   }
 }

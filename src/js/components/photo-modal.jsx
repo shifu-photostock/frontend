@@ -2,25 +2,37 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Card, Icon, Modal } from 'antd'
 
-const { Meta } = Card;
+import { hidePhotoModal } from '../actions/uiActions';
 
-export default class PhotoModal extends Component {
-  render() {
-    return (
-      <Modal 
-        className='photo-modal'
-        visible={this.props.visible}
-        bodyStyle={{padding: '10px'}}
-        footer={null}
-        onOk={this.props.onOk}
-        onCancel={this.props.onCancel}
-        width='auto'
-        centered={true}
-      >
-        {this.props.children}
-      </Modal>
-    )
+const PhotoModal = ({ visible, src, hideModal }) => (
+  <Modal 
+    className='photo-modal'
+    visible={visible}
+    bodyStyle={{padding: '10px'}}
+    footer={null}
+    onOk={hideModal}
+    onCancel={hideModal}
+    width='auto'
+    centered={true}
+  >
+    <img src={src} />
+  </Modal>
+);
+
+const mapStateToProps = ({ ui }) => {
+  return {
+    visible: ui.showPhotoModal,
+    src: ui.photoSrc
   }
-};
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    hideModal: () => {
+      dispatch(hidePhotoModal());
+    }
+  }
+}
 
 //TODO add hashtags on uploading
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoModal);

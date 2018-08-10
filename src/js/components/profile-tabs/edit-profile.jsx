@@ -19,7 +19,6 @@ class RegistrationForm extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.handleAnswer = this.handleAnswer.bind(this);
   }
 
   handleSubmit(e) {
@@ -46,19 +45,10 @@ class RegistrationForm extends Component {
     })
   }
 
-  handleAnswer(err) {
-    const { form } = this.props;
-    if (err) {
-      form.resetFields();
-      return message.error('save failed!');
-    } 
-    message.success('successful save!');
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const { local } = this.props.user;
+    const { user } = this.props;
 
 
     const formItemLayout = {
@@ -86,7 +76,7 @@ class RegistrationForm extends Component {
 
     return (
       <Form onChange={this.onChange} onSubmit={this.handleSubmit}>
-        <UserAvatar localSource={true} canChange={true} name={this.props.form.getFieldValue('nickname')}  /> 
+        <UserAvatar canChange={true} name={this.props.form.getFieldValue('nickname')}  /> 
         <FormItem
           {...formItemLayout}
           label="E-mail"
@@ -97,7 +87,7 @@ class RegistrationForm extends Component {
             }, {
               message: 'Please input your E-mail!',
             }],
-            initialValue: local.email,
+            initialValue: user.email,
           })(
             <Input />
           )}
@@ -115,7 +105,7 @@ class RegistrationForm extends Component {
             rules: [{
               whitespace: true 
             }],
-            initialValue: local.name,
+            initialValue: user.name,
           })(
             <Input onChange={this.handleNickChange} />
           )}
@@ -130,8 +120,8 @@ class RegistrationForm extends Component {
 
 function mapStateToProps({ user }) {
   return {
+    user,
     logged: !!user.data,
-    user: user.data
   }
 }
 
