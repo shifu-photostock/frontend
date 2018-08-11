@@ -29,19 +29,13 @@ html, body, #root {
 }
 
 .carousel {
-  width: 80%;
-  min-height: 200px;
+  width: 90%;
   margin: auto;
 }
 
 .slider-slide {
   display: inline-flex !important;
   align-items: center;
-}
-
-.slider-slide img {
-  max-height: 300px;
-  object-fit: cover;
 }
 
 .navbar-wrapper {
@@ -280,4 +274,13 @@ html, body, #root {
 
 .like-icon:hover, .like-icon-active {
   color: rgb(244, 63, 83);
+}
+
+.photo-card {
+  width: 240px;
+}
+
+.photo-card__image {
+  height: 218px;
+  object-fit: cover;
 }

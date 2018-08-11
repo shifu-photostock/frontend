@@ -59,8 +59,8 @@ export default class PhotoCarousel extends Component {
       slideIndex: page * 5,
       slidesToShow: 5,
       slidesToScroll: 5,
-      initialSlideHeight: 200,
-      cellSpacing: 20,
+      initialSlideHeight: 350,
+      cellSpacing: 10,
       renderBottomCenterControls: null,
       renderCenterRightControls: ({ nextSlide, prevSlide, goToSlide }) => {
         this.goToSlide = goToSlide;

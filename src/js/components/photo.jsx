@@ -59,9 +59,9 @@ export default class Photo extends Component {
     return (
       <Fragment>
         <Card
+          className='photo-card'
           hoverable
-          style={{width: 240}}
-          cover={<img onClick={this.showPhoto} onLoad={loadHandler} src={src} />}
+          cover={<img className='photo-card__image' onClick={this.showPhoto} onLoad={loadHandler} src={src} />}
           actions={this.renderActions()}
         >
         </Card>
