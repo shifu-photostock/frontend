@@ -273,3 +273,11 @@ html, body, #root {
 .avatar-click {
   cursor: pointer;
 }
+
+.like-icon {
+  transition: color .3s;
+}
+
+.like-icon:hover, .like-icon-active {
+  color: rgb(244, 63, 83);
+}

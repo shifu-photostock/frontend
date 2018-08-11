@@ -74,6 +74,45 @@ export function deletePhoto(filename) {
   }
 }
 
+export function userPhotoLiked(filename) {
+  return {
+    type: 'USER_PHOTO_LIKED',
+    filename
+  }
+}
+
+export function strangerPhotoLiked(filename) {
+  return {
+    type: 'STRANGER_PHOTO_LIKED',
+    filename
+  }
+}
+
+export function likePhoto(filename) {
+  return (dispatch, getState) => {
+    /*axios.post('')
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })*/
+  }
+}
+
+export function unlikePhoto(filename) {
+  return (dispatch, getState) => {
+    /*axios.post('')
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })*/
+  }
+}
+
+
 export function deleteAll() {
   return (dispatch) => {
     axios.get('/getallimages')

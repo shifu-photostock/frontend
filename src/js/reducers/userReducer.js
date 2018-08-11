@@ -13,6 +13,14 @@ const userReducer = (state=initialState, action) => {
     console.log('user logged');
     state = {...state, ...action.payload, status: 'loaded'};
     break;
+  case 'USER_PHOTO_LIKED':
+    photos.forEach((photo) => {
+      if (photo.filename === action.filename) {
+        photo.liked = !photo.liked;  
+      } 
+    });
+    state = {...state, photos};
+    break;
   case 'DELETE_PHOTO':
     photos = photos.filter((photo) => {
       if (!photo) return;

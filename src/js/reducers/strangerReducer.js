@@ -12,6 +12,14 @@ const userReducer = (state=initialState, action) => {
   case 'SET_STRANGER':
     state = {...initialState, ...action.payload, loading: false};   
     break;
+  case 'STRANGER_PHOTO_LIKED':
+    photos.forEach((photo) => {
+      if (photo.filename === action.filename) {
+        photo.liked = !photo.liked;  
+      } 
+    });
+    state = {...state, photos}
+    break;
   case 'STRANGER_PHOTOS_END':
     state = {...state, end: true};
     break;
