@@ -1,53 +1,27 @@
 import axios from '../containers/axiosApi';
 import { checkLogged } from './userActions.js';
 
-export function incUserPage() {
+export function incPage() {
   return {
-    type: 'INC_USER_PAGE'
+    type: 'INC_PAGE'
   }
 }
 
-export function incStrangerPage() {
+export function endPhotos() {
   return {
-    type: 'INC_STRANGER_PAGE'
+    type: 'PHOTOS_END'
   }
 }
 
-export function endUserPhotos() {
+export function decPage() {
   return {
-    type: 'USER_PHOTOS_END'
+    type: 'DEC_PAGE'
   }
 }
 
-export function endStrangerPhotos() {
+export function fetchPhotosSuccess(photos, page) {
   return {
-    type: 'STRANGER_PHOTOS_END'
-  }
-}
-
-export function decUserPage() {
-  return {
-    type: 'DEC_USER_PAGE'
-  }
-}
-
-export function decStrangerPage() {
-  return {
-    type: 'DEC_STRANGER_PAGE'
-  }
-}
-
-
-export function fetchUserPhotosSuccess(photos, page) {
-  return {
-    type: 'FETCH_USER_PHOTOS_SUCCESS',
-    payload: { list: photos, page } 
-  }
-}
-
-export function fetchStrangerPhotosSuccess(photos, page, custom) {
-  return {
-    type: 'FETCH_STRANGER_PHOTOS_SUCCESS',
+    type: 'FETCH_PHOTOS_SUCCESS',
     payload: { list: photos, page } 
   }
 }
@@ -74,16 +48,61 @@ export function deletePhoto(filename) {
   }
 }
 
-export function userPhotoLiked(filename) {
-  return {
-    type: 'USER_PHOTO_LIKED',
-    filename
+export function fetchComments(filename) {
+  return (dispatch) => {
+    axios.get(`/image/${filename}/comment`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 }
 
-export function strangerPhotoLiked(filename) {
+export function addComment(comment, filename) {
+  return (dispatch) => {
+    axios.post(`/image/${filename}/comment`, {
+      comment
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+export function deleteComment(id) {
+  return (dispatch) => {
+    axios.delete(`/comment/${id}`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+export function editComment(id, newcomment) {
+  return (dispatch) => {
+    axios.put(`/comment/${id}`, {
+      newcomment
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+export function photoLiked(filename) {
   return {
-    type: 'STRANGER_PHOTO_LIKED',
+    type: 'PHOTO_LIKED',
     filename
   }
 }
@@ -138,7 +157,13 @@ export function deleteAll() {
   }
 }
 
-export function fetchPhotos(page) {
+export function clearPhotos() {
+  return {
+    type: 'CLEAR_PHOTOS'
+  }
+}
+
+export function fetchPhotos(page, isEmpty) {
   return (dispatch, getState) => {
     let { photos, user, stranger, router } = getState();
 
@@ -166,19 +191,11 @@ export function fetchPhotos(page) {
       }));
     })
     .then((urls) => {
-      if (isStranger) {
-        dispatch(fetchStrangerPhotosSuccess(urls, page));
-      } else {
-        dispatch(fetchUserPhotosSuccess(urls, page));
-      }
+      dispatch(fetchPhotosSuccess(urls, page));
     })
     .catch((err) => {
       console.log(err);
-      if (isStranger) {
-        dispatch(endStrangerPhotos());
-      } else {
-        dispatch(endUserPhotos());
-      }
+      dispatch(endPhotos());
     })
   }
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 
-import { fetchPhotos, incUserPage, incStrangerPage } from '../actions/photosActions';
+import { clearPhotos, fetchPhotos, incPage } from '../actions/photosActions';
 import Photo from './photo.jsx';
 
 
@@ -16,13 +16,15 @@ export default class PhotoCards extends Component {
   }
 
   componentDidMount() {
+    this.props.clearPhotos();
     this.props.fetchPhotos(0);
     this.props.fetchPhotos(1);
   }
   
   componentDidUpdate(prevProps) {
 
-    if (JSON.stringify(prevProps.source) !== JSON.stringify(this.props.source)) {
+    if (this.props.location !== prevProps.location) {
+      this.props.clearPhotos();
       this.props.fetchPhotos(0);
       this.props.fetchPhotos(1);
       return;
@@ -35,9 +37,7 @@ export default class PhotoCards extends Component {
   }
 
   loadMore() {
-    let { isStranger, incStrangerPage, incUserPage } = this.props;
-
-    isStranger ? incStrangerPage() : incUserPage();
+    this.props.incPage();
   }
 
   render() {
@@ -63,14 +63,14 @@ export default class PhotoCards extends Component {
   }
 }
 
-function mapStateToProps({ user, stranger, router }) {
+function mapStateToProps({ photos, user, stranger, router }) {
   let isStranger = router.location.pathname.includes('/users/') && stranger;
 
-  let source = isStranger ? stranger : user;
   return {
-    page: source.page,
-    photos: source.photos,
-    end: source.end,
+    page: photos.page,
+    photos: photos.list,
+    end: photos.end,
+    location: router.location.pathname,
     isStranger
   }
 }
@@ -80,11 +80,11 @@ function mapDispatchToProps(dispatch) {
     fetchPhotos: (page) => {
       dispatch(fetchPhotos(page));
     },
-    incStrangerPage: () => {
-      dispatch(incStrangerPage());
+    incPage: () => {
+      dispatch(incPage());
     },
-    incUserPage: () => {
-      dispatch(incUserPage());
-    },
+    clearPhotos: () => {
+      dispatch(clearPhotos());
+    }
   }
 }

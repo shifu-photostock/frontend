@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Carousel from 'nuka-carousel';
 
 import 
-{ fetchPhotos, incUserPage, incStrangerPage,  decStrangerPage, decUserPage }
+{ fetchPhotos, incPage, decPage }
 from '../actions/photosActions';
 import Photo from './photo.jsx';
 
@@ -36,11 +36,11 @@ export default class PhotoCarousel extends Component {
   }
 
   incSlide(cb) {
-    this.props.incUserPage();
+    this.props.incPage();
   }
 
   decSlide(cb) {
-    this.props.decUserPage();
+    this.props.decPage();
   }
 
   render() {
@@ -100,10 +100,10 @@ export default class PhotoCarousel extends Component {
   }
 }
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ user, photos }) {
   return {
-    photos: user.photos,
-    page: user.page
+    photos: photos.list,
+    page: photos.page
   }
 }
 
@@ -112,14 +112,11 @@ function mapDispatchToProps(dispatch) {
     fetchPhotos: (page) => {
       dispatch(fetchPhotos(page));
     },
-    incUserPage: () => {
-      dispatch(incUserPage());
+    incPage: () => {
+      dispatch(incPage());
     },
-    incStrangerPage: () => {
-      dispatch(incStrangerPage());
-    },
-    decUserPage: () => {
-      dispatch(decUserPage());
+    decPage: () => {
+      dispatch(decPage());
     }
   }
 }
