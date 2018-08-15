@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Card, Icon, Modal } from 'antd'
 
 import { hidePhotoModal } from '../actions/uiActions';
+import CommentsBar from './comments-bar.jsx';
 
-const PhotoModal = ({ visible, src, hideModal }) => (
+const PhotoModal = ({ visible, photoName, hideModal }) => (
   <Modal 
     className='photo-modal'
     visible={visible}
@@ -15,14 +16,15 @@ const PhotoModal = ({ visible, src, hideModal }) => (
     width='auto'
     centered={true}
   >
-    <img src={src} />
+    <img src={`http://138.68.234.86:8888/image/${photoName}`} />
+    <CommentsBar />
   </Modal>
 );
 
 const mapStateToProps = ({ ui }) => {
   return {
     visible: ui.showPhotoModal,
-    src: ui.photoSrc
+    photoName: ui.photoName
   }
 }
 

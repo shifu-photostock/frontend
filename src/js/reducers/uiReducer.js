@@ -1,7 +1,7 @@
 'use strict'
 let initialState = {
   showPhotoModal: false,
-  photoSrc: null,
+  photoName: null,
   showMessage: false,
   messageTitle: '',
   messageStatus: ''
@@ -27,10 +27,10 @@ const searchReducer = (state=initialState, action) => {
   };
     break;
   case 'SHOW_PHOTO_MODAL':
-    state = {...state, showPhotoModal: true, photoSrc: action.src};
+    state = {...state, showPhotoModal: true, photoName: action.filename};
     break;
   case 'HIDE_PHOTO_MODAL':
-    state = {...state, showPhotoModal: false, photoSrc: null};
+    state = {...state, showPhotoModal: false, photoName: null};
     break;
   }
   return state;

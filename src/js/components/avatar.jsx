@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Avatar } from 'antd';
+import { Link } from 'react-router-dom';
 
 import AvatarOptions from './avatar-options-modal.jsx';
 import PhotoModal from './photo-modal.jsx';
@@ -15,7 +16,7 @@ export default class UserAvatar extends Component {
     super();
 
     this.getName = this.getName.bind(this);
-    this.getSrc = this.getSrc.bind(this);
+    this.getFilename = this.getFilename.bind(this);
   }
 
   getName() {
@@ -29,25 +30,25 @@ export default class UserAvatar extends Component {
     }
   }
 
-  getSrc() {
+  getFilename() {
     let { src, user, isStranger, stranger } = this.props;
 
     if (src !== undefined) {
       return src;
     } else if (user.avatar && !isStranger) {
-      return `${SERVER}/image/${user.avatar}`;
+      return user.avatar;
     } else if (stranger.avatar) {
-      return `${SERVER}/image/${stranger.avatar}`;
+      return stranger.avatar;
     }
     return null;
   }
 
-
   render() {
-    let avatar = null, src = this.getSrc();
+    let avatar = null, fileName = this.getFilename(), name = this.getName();
 
-    if (src) {
-      avatar = (<span className='avatar-click' onClick={() => this.props.showPhoto(src)}>
+    if (fileName) {
+      let src = `${SERVER}/image/${fileName}`;
+      avatar = (<span className='avatar-click' onClick={() => this.props.showPhoto(fileName)}>
                  <Avatar src={src} size={64} />
                </span>);
     } else {
@@ -60,7 +61,7 @@ export default class UserAvatar extends Component {
           <span className='regular-avatar'>
             {avatar}
             <span className='avatar-name'>
-              {this.getName()}
+              {name}
             </span>
           </span>}
         {!this.props.nogrid &&
@@ -70,7 +71,7 @@ export default class UserAvatar extends Component {
             </Col>
             <Col span={16}>
               <Row className='row-name' gutter={16}>
-                {this.getName()}
+                {name}
               </Row>
               {this.props.canChange &&
               <Row className='row-avatar-options' gutter={16}>
@@ -95,7 +96,7 @@ function mapStateToProps({ user, stranger, router }) {
 function mapDispatchToProps(dispatch) {
   return {
     showPhoto: (src) => {
-      dispatch(showPhotoModal(src));
+      dispatch(showPhotoModal(src, true));
     }
   }
 }

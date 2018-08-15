@@ -6,6 +6,7 @@ import searchReducer from './searchReducer';
 import avatarReducer from './avatarReducer';
 import strangerReducer from './strangerReducer';
 import photosReducer from './photosReducer';
+import commentsReducer from './commentsReducer';
 import uiReducer from './uiReducer';
 
 let reducer = combineReducers({
@@ -14,7 +15,8 @@ let reducer = combineReducers({
   avatar: avatarReducer,
   stranger: strangerReducer,
   photos: photosReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  comments: commentsReducer,
 });
 
 export default reducer;

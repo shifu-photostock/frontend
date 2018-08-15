@@ -141,6 +141,10 @@ html, body, #root {
   margin-bottom: 15px;
 }
 
+.avatar-name a {
+  color: y;
+}
+
 .regular-avatar .ant-avatar { 
   margin-right: 10px;
 }
@@ -195,6 +199,7 @@ html, body, #root {
 .user-info .avatar-name {
   vertical-align: top;
   margin-left: 50px;
+  color: #242424;
 }
 
 .user-info .anticon {
@@ -217,6 +222,10 @@ html, body, #root {
   padding: 20px;
 }
 
+.photo-modal .ant-modal-body {
+  padding-bottom: 500px !important;
+}
+
 .photo-modal img {
   max-width: 100%;
   max-height: 100%;
@@ -230,13 +239,13 @@ html, body, #root {
   margin: auto;
 }
 
-.ant-spin-lg .ant-spin-dot {
+.initial-load-spin.ant-spin-lg .ant-spin-dot {
   font-size: 64px;
   width: 64px;
   height: 64px;
 }
 
-.ant-spin-lg .ant-spin-dot i {
+.initial-load-spin.ant-spin-lg .ant-spin-dot i {
   width: 27px;
   height: 27px;
 }
@@ -283,4 +292,127 @@ html, body, #root {
 .photo-card__image {
   height: 218px;
   object-fit: cover;
+}
+
+.comments-bar {
+  margin-top: 10px;
+  padding: 10px;
+  height: 500px;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.comments-bar__body .ant-spin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.comments-bar__header {
+  text-align: left;
+}
+
+.comments-bar__header .ant-avatar {
+  height: 50px;
+  width: 50px;
+  font-size: 24px;
+}
+
+.comments-bar__header .avatar-name {
+  vertical-align: top;
+  font-size: 18px;
+  font-weight: 600;
+  color: #242424;
+}
+
+.comments-bar__header .ant-avatar .anticon {
+  margin-top: 6px;
+}
+
+.comments-bar__body {
+  text-align: left;
+  height: 250px;
+  overflow: auto;
+  position: relative;
+}
+
+.comment {
+  margin: 10px 0;
+  padding: 5px;
+  padding-right: 50px;
+  position: relative;
+}
+
+.comment__actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.comment__actions .anticon {
+  margin: 0 5px;
+  transition: .3s;
+}
+
+.comment__actions .anticon:hover {
+  color: #242424; 
+  cursor: pointer;
+}
+
+.comment__content {
+  margin-left: 10px;
+}
+
+.comment__name {
+  font-weight: 600;
+  color: #242424;
+}
+
+.comment__name:hover {
+  font-weight: 800;
+  color: #242424; 
+}
+
+.comments-bar__footer-wrapper {
+  height: 70px;
+  position: relative;
+}
+
+.comments-bar__footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.comments-bar__footer .ant-input {
+  padding-right: 70px;
+  overflow-X: hidden;
+}
+
+.comments-bar__footer span {
+  cursor: pointer;
+  background: transparent;
+  margin: 0 5px;
+  color: #40a9ff;
+}
+
+.comments-bar__footer .cancel-btn {
+  color: #f5222d;
+}
+
+.comments-bar__footer .buttons {
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+}
+
+.add-comment-btn:hover, .add-comment:active, .add-comment:focus {
+  background: transparent;
+}
+
+.ant-modal-content {
+  margin-bottom: 100px;
 }

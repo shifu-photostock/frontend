@@ -12,10 +12,10 @@ export function hideMessage() {
   }
 }
 
-export function showPhotoModal(src) {
+export function showPhotoModal(filename) {
   return {
     type: 'SHOW_PHOTO_MODAL',
-    src
+    filename,
   }
 }
 

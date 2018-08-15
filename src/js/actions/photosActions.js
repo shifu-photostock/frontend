@@ -1,5 +1,6 @@
 import axios from '../containers/axiosApi';
 import { checkLogged } from './userActions.js';
+import { showMessage } from './uiActions';
 
 export function incPage() {
   return {
@@ -26,6 +27,7 @@ export function fetchPhotosSuccess(photos, page) {
   }
 }
 
+
 export function photoDeleted(filename) {
   return {
     type: 'DELETE_PHOTO',
@@ -41,58 +43,6 @@ export function deletePhoto(filename) {
       console.log(res);
       dispatch(photoDeleted(filename));
       dispatch(fetchPhotos(photos.page + 1));
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
-}
-
-export function fetchComments(filename) {
-  return (dispatch) => {
-    axios.get(`/image/${filename}/comment`)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
-}
-
-export function addComment(comment, filename) {
-  return (dispatch) => {
-    axios.post(`/image/${filename}/comment`, {
-      comment
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
-}
-
-export function deleteComment(id) {
-  return (dispatch) => {
-    axios.delete(`/comment/${id}`)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
-}
-
-export function editComment(id, newcomment) {
-  return (dispatch) => {
-    axios.put(`/comment/${id}`, {
-      newcomment
-    })
-    .then((res) => {
-      console.log(res);
     })
     .catch((err) => {
       console.log(err);

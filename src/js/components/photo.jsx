@@ -51,7 +51,7 @@ export default class Photo extends Component {
   }
 
   showPhoto() {
-    this.props.showPhoto(this.props.src);
+    this.props.showPhoto(this.props.filename);
   }
 
   render() {
@@ -87,8 +87,8 @@ function mapDispatchToProps(dispatch) {
     unlike: (name) => {
       dispatch(unlikePhoto(name));
     },
-    showPhoto: (src) => {
-      dispatch(showPhotoModal(src));
+    showPhoto: (name) => {
+      dispatch(showPhotoModal(name));
     }
   }
 }
