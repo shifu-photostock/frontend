@@ -18,9 +18,7 @@ const userReducer = (state=initialState, action) => {
     state = {...initialState, status: 'loaded'};
     break;
   case 'AVATAR_DELETED':
-    let newLocal = {...state.data.local, avatar: null};
-    let newData = {...state.data, local: newLocal};
-    state = {...state, data: newData}
+    state = {...state, avatar: null};
     break;
   }
   return state;

@@ -19,7 +19,7 @@ function renderAvatar(user) {
     <Option key={user.id}>
       <Link to={`/users/${user.name}`}>
         <UserAvatar 
-          src={user.avatar ? `http://138.68.234.86:8888/image/${user.avatar}` : null}
+          filename={user.avatar ? user.avatar : null}
           name={user.name}
           nogrid={true}/>
       </Link>

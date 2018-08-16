@@ -24,7 +24,7 @@ const searchReducer = (state=initialState, action) => {
       showMessage: false,
       messageTitle: '',
       messageStatus: ''
-  };
+    };
     break;
   case 'SHOW_PHOTO_MODAL':
     state = {...state, showPhotoModal: true, photoName: action.filename};

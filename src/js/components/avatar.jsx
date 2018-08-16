@@ -31,10 +31,10 @@ export default class UserAvatar extends Component {
   }
 
   getFilename() {
-    let { src, user, isStranger, stranger } = this.props;
+    let { filename, user, isStranger, stranger } = this.props;
 
-    if (src !== undefined) {
-      return src;
+    if (filename !== undefined) {
+      return filename;
     } else if (user.avatar && !isStranger) {
       return user.avatar;
     } else if (stranger.avatar) {

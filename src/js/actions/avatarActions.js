@@ -2,7 +2,7 @@ import { deletePhoto } from './photosActions';
 
 export function deleteAvatar() {
   return (dispatch, getState) => {
-    let avatar = getState().user.data.local.avatar;
+    let avatar = getState().user.avatar;
     if (!avatar) return;
 
     dispatch(deletePhoto(avatar));

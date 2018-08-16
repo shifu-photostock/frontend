@@ -33,8 +33,10 @@ export default class AvatarOptionsModal extends Component {
 
   deleteAvatar() {
     this.props.deleteAvatar();
+    this.setState({
+      visible: false
+    })
   }
-
 
   render() {
     return (
