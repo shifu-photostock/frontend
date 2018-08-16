@@ -24,3 +24,16 @@ export function hidePhotoModal() {
     type: 'HIDE_PHOTO_MODAL'
   }
 }
+
+export function showLikesDrawer(likes) {
+  return {
+    type: 'SHOW_LIKES_DRAWER',
+    likes
+  }
+}
+
+export function hideLikesDrawer(likes) {
+  return {
+    type: 'HIDE_LIKES_DRAWER'
+  }
+}

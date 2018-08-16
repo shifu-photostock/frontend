@@ -17,6 +17,7 @@ import ProfileEdit from './components/profile-edit.jsx';
 import UserPage from './components/user-page.jsx';
 import PhotoModal from './components/photo-modal.jsx';
 import Message from './components/message.jsx';
+import LikesDrawer from './components/likes-drawer.jsx';
 import { checkLogged } from './actions/userActions';
 import { history } from './containers/store';
 
@@ -73,6 +74,7 @@ export default class Router extends Component {
           </Switch>
           <PhotoModal />
           <Message />
+          <LikesDrawer />
         </Fragment>
       </ConnectedRouter> 
     )

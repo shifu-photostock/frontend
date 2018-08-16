@@ -4,7 +4,8 @@ let initialState = {
   photoName: null,
   showMessage: false,
   messageTitle: '',
-  messageStatus: ''
+  messageStatus: '',
+  photoLikes: []
 };
 
 
@@ -25,6 +26,12 @@ const searchReducer = (state=initialState, action) => {
       messageTitle: '',
       messageStatus: ''
     };
+    break;
+  case 'SHOW_LIKES_DRAWER':
+    state = {...state, showLikesDrawer: true, photoLikes: action.likes}
+    break;
+  case 'HIDE_LIKES_DRAWER':
+    state = {...state, showLikesDrawer: false, photoLikes: []}
     break;
   case 'SHOW_PHOTO_MODAL':
     state = {...state, showPhotoModal: true, photoName: action.filename};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, Icon, Modal } from 'antd'
 
 import { deletePhoto, likePhoto, unlikePhoto } from '../actions/photosActions';
-import { showPhotoModal } from '../actions/uiActions';
+import { showPhotoModal, showLikesDrawer } from '../actions/uiActions';
 import PhotoModal from './photo-modal.jsx';
 
 const { Meta } = Card;
@@ -19,7 +19,7 @@ export default class Photo extends Component {
   }
 
   handleClick(e) {
-    let { like, filename, unlike, liked } = this.props;
+    let { like, filename, unlike, liked, likes } = this.props;
     switch(e.target.id) {
     case 'delete':
       this.props.delete(filename);
@@ -30,6 +30,9 @@ export default class Photo extends Component {
       } else {
         like(filename);
       }
+      break;
+    case 'likes':
+      this.props.showLikesDrawer(likes);
       break;
     }
   }
@@ -46,7 +49,7 @@ export default class Photo extends Component {
           id='like'
           type='heart'
         />
-        <span className='likes-count'>
+        <span className='likes-count' id='likes' onClick={this.handleClick}>
           {likes.length}
         </span>
       </span>
@@ -99,6 +102,9 @@ function mapDispatchToProps(dispatch) {
     },
     showPhoto: (name) => {
       dispatch(showPhotoModal(name));
+    },
+    showLikesDrawer: (likes) => {
+      dispatch(showLikesDrawer(likes));
     }
   }
 }

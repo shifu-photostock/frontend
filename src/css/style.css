@@ -429,6 +429,7 @@ html, body, #root {
 
 .likes-count {
   margin-left: 5px;
+  cursor: pointer !important;
 }
 
 .ant-card-actions {
