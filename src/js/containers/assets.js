@@ -26,3 +26,16 @@ export function getPhotoByName(photos, name) {
   });
   return Photo;
 }
+
+export function isLiked(likes, uid) {
+  for (let i = 0; i < likes.length; i++) {
+    if (likes[i].authorId === uid) return true;
+  }
+  return false;
+}
+
+export function deleteLike(likes, uid) {
+  return likes.filter((like) => {
+    return like.authorId !== uid;
+  })
+}

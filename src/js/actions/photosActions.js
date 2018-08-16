@@ -1,6 +1,7 @@
 import axios from '../containers/axiosApi';
 import { checkLogged } from './userActions.js';
 import { showMessage } from './uiActions';
+import { isLiked } from '../containers/assets';
 
 export function incPage() {
   return {
@@ -50,34 +51,51 @@ export function deletePhoto(filename) {
   }
 }
 
-export function photoLiked(filename) {
+export function photoLike(filename, uid) {
   return {
-    type: 'PHOTO_LIKED',
-    filename
+    type: 'PHOTO_LIKE',
+    filename,
+    uid
   }
 }
 
 export function likePhoto(filename) {
   return (dispatch, getState) => {
-    /*axios.post('')
+    let uid = getState().user.id;
+
+    if (!uid) {
+      return dispatch(showMessage('you must log in to like photos','error'));
+    }
+
+    dispatch(photoLike(filename, uid));
+
+    axios.post(`/image/${filename}/like`)
     .then((res) => {
       console.log(res);
     })
     .catch((err) => {
       console.log(err);
-    })*/
+      dispatch(showMessage('network error', 'error'));
+      dispatch(photoLike(filename, uid));
+    })
   }
 }
 
 export function unlikePhoto(filename) {
   return (dispatch, getState) => {
-    /*axios.post('')
+    let uid = getState().user.id;
+
+    dispatch(photoLike(filename, uid));
+
+    axios.delete(`/image/${filename}/like`)
     .then((res) => {
       console.log(res);
     })
     .catch((err) => {
       console.log(err);
-    })*/
+      dispatch(showMessage('network error', 'error'));
+      dispatch(photoLike(filename, uid));
+    })
   }
 }
 
@@ -125,6 +143,7 @@ export function fetchPhotos(page, isEmpty) {
       return;
     }
 
+
     let path = `/profile/${uid}/carousel/${page}`;
 
     axios.get(path)
@@ -137,7 +156,9 @@ export function fetchPhotos(page, isEmpty) {
       return photos.map((photo) => ({
         src: `http://138.68.234.86:8888/image/${photo.filename}`,
         id: photo._id,
-        filename: photo.filename
+        filename: photo.filename,
+        liked: isLiked(photo.likes, user.id),
+        likes: photo.likes
       }));
     })
     .then((urls) => {

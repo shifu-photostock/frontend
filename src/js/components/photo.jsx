@@ -36,15 +36,25 @@ export default class Photo extends Component {
 
   renderActions() {
     let actions = [];
-    let { liked } = this.props;
+    let { liked, likes } = this.props;
 
     actions.push (
-      <Icon className={'like-icon'+(liked ? '-active' : '')} onClick={this.handleClick} id='like' type='heart' />
-    )
+      <span className='like-wrapper'>
+        <Icon 
+          className={'like-icon'+(liked ? '-liked' : '')}
+          onClick={this.handleClick}
+          id='like'
+          type='heart'
+        />
+        <span className='likes-count'>
+          {likes.length}
+        </span>
+      </span>
+    );
 
     if (!this.props.isStranger) {
       actions.push(
-        <Icon onClick={this.handleClick} id='delete' type='close-circle-o' />
+        <Icon className='delete-icon' onClick={this.handleClick} id='delete' type='close-circle-o' />
       );
     } 
     return actions;
@@ -72,7 +82,7 @@ export default class Photo extends Component {
 
 function mapStateToProps({ router }) {
   return {
-    isStranger: router.location.pathname.includes('/users/')
+    isStranger: router.location.pathname.includes('/users/'),
   }
 }
 

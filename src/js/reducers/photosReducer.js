@@ -1,4 +1,6 @@
 'use strict'
+import { deleteLike } from '../containers/assets';
+
 let initialState = {
   page: 0,
   end: false,
@@ -8,9 +10,17 @@ let initialState = {
 const photosReducer = (state=initialState, action) => {
   let photos = state.list.concat();
   switch(action.type) {
-  case 'PHOTO_LIKED':
+  case 'PHOTO_LIKE':
     photos.forEach((photo) => {
+      if (!photo) return;
+
       if (photo.filename === action.filename) {
+        if (photo.liked) {
+          photo.likes = deleteLike(photo.likes, action.uid);
+        } else {
+          photo.likes = photo.likes.concat();
+          photo.likes.push({ authorId: action.uid });
+        }
         photo.liked = !photo.liked;  
       } 
     });

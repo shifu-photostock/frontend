@@ -279,10 +279,12 @@ html, body, #root {
 
 .like-icon {
   transition: color .3s;
+  cursor: pointer;
 }
 
-.like-icon:hover, .like-icon-active {
+.like-icon-liked {
   color: rgb(244, 63, 83);
+  cursor: pointer;
 }
 
 .photo-card {
@@ -423,4 +425,26 @@ html, body, #root {
 
 .ant-avatar img {
   object-fit: cover;
+}
+
+.likes-count {
+  margin-left: 5px;
+}
+
+.ant-card-actions {
+  cursor: default;
+}
+
+.ant-card-actions li:hover {
+  cursor: default;
+}
+
+.ant-card-actions li span:hover {
+  color: grey;
+  cursor: default;
+}
+
+.delete-icon:hover {
+  color: rgb(24, 144, 255);
+  cursor: pointer;
 }
