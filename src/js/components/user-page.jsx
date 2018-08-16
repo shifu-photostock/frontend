@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 
 import UserInfo from './user-info.jsx';
 import PhotoCards from './photo-cards.jsx';
@@ -32,7 +33,7 @@ export default class UserPage extends Component {
 
   render() {
     if (this.props.isStranger && this.props.stranger.loading) {
-      return <div>Loading</div>
+      return <Spin size='large' className='initial-load-spin' />
     }
 
     return (
