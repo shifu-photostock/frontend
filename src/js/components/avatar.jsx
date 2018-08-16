@@ -85,8 +85,9 @@ export default class UserAvatar extends Component {
   }
 };
 
-function mapStateToProps({ user, stranger, router }) {
+function mapStateToProps({ user, stranger, router, avatar }) {
   return {
+    avatar,
     user,
     stranger,
     isStranger: router.location.pathname.includes('/users/') && stranger

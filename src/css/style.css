@@ -416,3 +416,11 @@ html, body, #root {
 .ant-modal-content {
   margin-bottom: 100px;
 }
+
+.avatar-loading {
+  z-index: 999;
+}
+
+.ant-avatar img {
+  object-fit: cover;
+}
